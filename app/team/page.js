@@ -10,19 +10,10 @@ import { Badge } from '@/components/ui/Badge';
 import { teamMembers } from '@/lib/data/team';
 
 export default function TeamPage() {
-    const scrollToSection = (id) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     return (
         <div className="min-h-screen bg-background">
-            <Header scrollToSection={scrollToSection} />
-      
             {/* Hero Section */}
-            <section className="relative pt-24 pb-16 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+            <section className="relative pt-10 pb-5 bg-linear-to-br from-primary/5 via-background to-primary/5">
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="max-w-3xl">
                         <Badge className="mb-4">Our Team</Badge>
@@ -170,8 +161,6 @@ export default function TeamPage() {
                     </Button>
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }

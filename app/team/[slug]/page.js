@@ -12,14 +12,7 @@ import { getTeamMemberBySlug } from '@/lib/data/team';
 
 export default function TeamMemberDetailPage() {
   const params = useParams();
-  const member = getTeamMemberBySlug(params.slug);
-  
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const member = getTeamMemberBySlug(params.slug); 
 
   if (!member) {
     return (
@@ -35,11 +28,9 @@ export default function TeamMemberDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header scrollToSection={scrollToSection} />
-      
+    <div className="min-h-screen bg-background">     
       {/* Hero Section */}
-      <section className="relative pt-24 pb-16 bg-gradient-to-br from-primary/10 via-background to-primary/5">
+      <section className="relative pt-10 pb-16 bg-linear-to-br from-primary/10 via-background to-primary/5">
         <div className="container mx-auto px-4 md:px-8">
           <Link href="/team" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
             <ArrowLeft size={20} />
@@ -231,8 +222,6 @@ export default function TeamMemberDetailPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

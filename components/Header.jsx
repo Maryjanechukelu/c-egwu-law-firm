@@ -1,38 +1,37 @@
 'use client';
 import React, { useState } from 'react';
-import Image from "next/image"
-import { Menu, X, Scale } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X } from 'lucide-react';
 import { Button } from './ui/Button';
 
-export const Header = ({ scrollToSection }) => {
+export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const NavLink = ({ to, children }) => (
-    <button 
-      onClick={() => scrollToSection(to)}
+    <Link
+      href={to === 'home' ? '/' : `/${to}`}
       className="text-sm font-medium transition-colors hover:text-primary"
     >
       {children}
-    </button>
+    </Link>
   );
 
   const MobileNavLink = ({ to, children }) => (
-    <button 
-      onClick={() => {
-        scrollToSection(to);
-        setIsMenuOpen(false);
-      }}
-      className="text-lg font-medium py-2 transition-colors hover:text-primary w-full text-left"
+    <Link
+      href={to === 'home' ? '/' : `/${to}`}
+      onClick={() => setIsMenuOpen(false)}
+      className="text-lg font-medium py-2 transition-colors hover:text-primary"
     >
       {children}
-    </button>
+    </Link>
   );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter text-primary">
-          <div className="flex items-center md:gap-3">
+          <Link href="/" className="flex items-center md:gap-3">
             {/* Small logo - responsive sizing */}
             <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
               <Image
@@ -52,23 +51,25 @@ export const Header = ({ scrollToSection }) => {
                 className="object-contain"
               />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <NavLink to="home">Home</NavLink>
           <NavLink to="about">About Us</NavLink>
-          <NavLink to="practice">Practice Areas</NavLink>
+          <NavLink to="practice-areas">Practice Areas</NavLink>
           <NavLink to="team">Team</NavLink>
-          <NavLink to="contact">Contact</NavLink>
-          <Button onClick={() => scrollToSection('contact')}>
-            Book Consultation
-          </Button>
+          <NavLink to="articles">Articles</NavLink>
+          <Link href="/#contact">
+            <Button>
+              Book Consultation
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button 
+        <button
           className="md:hidden p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
@@ -84,12 +85,11 @@ export const Header = ({ scrollToSection }) => {
           <MobileNavLink to="practice">Practice Areas</MobileNavLink>
           <MobileNavLink to="team">Team</MobileNavLink>
           <MobileNavLink to="contact">Contact</MobileNavLink>
-          <Button className="w-full" onClick={() => {
-            scrollToSection('contact');
-            setIsMenuOpen(false);
-          }}>
-            Book Consultation
-          </Button>
+          <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
+            <Button className="w-full">
+              Book Consultation
+            </Button>
+          </Link>
         </div>
       )}
     </header>
