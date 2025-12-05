@@ -82,9 +82,9 @@ export const Header = () => {
         <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b shadow-lg p-4 flex flex-col gap-4">
           <MobileNavLink to="home">Home</MobileNavLink>
           <MobileNavLink to="about">About Us</MobileNavLink>
-          <MobileNavLink to="practice">Practice Areas</MobileNavLink>
+          <MobileNavLink to="practice-areas">Practice Areas</MobileNavLink>
           <MobileNavLink to="team">Team</MobileNavLink>
-          <MobileNavLink to="contact">Contact</MobileNavLink>
+          <MobileNavLink to="articles">Articles</MobileNavLink>
           <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
             <Button className="w-full">
               Book Consultation
