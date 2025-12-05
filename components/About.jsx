@@ -9,7 +9,7 @@ export const About = () => {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden bg-slate-100 shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80" 
+                src="/section1.jpg" 
                 alt="Modern Office Meeting" 
                 className="w-full h-full object-cover"
               />

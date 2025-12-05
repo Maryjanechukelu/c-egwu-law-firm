@@ -3,8 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ChevronRight, CheckCircle, ArrowLeft, Briefcase, Cpu, Scale, Users, ShieldCheck, Gavel } from 'lucide-react';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -21,14 +19,7 @@ const iconMap = {
 
 export default function PracticeAreaDetailPage() {
   const params = useParams();
-  const practiceArea = getPracticeAreaBySlug(params.slug);
-  
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const practiceArea = getPracticeAreaBySlug(params.slug); 
 
   if (!practiceArea) {
     return (
@@ -47,9 +38,7 @@ export default function PracticeAreaDetailPage() {
   const relatedPractices = getRelatedPracticeAreas(practiceArea.slug, practiceArea.relatedPractices);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header scrollToSection={scrollToSection} />
-      
+    <div className="min-h-screen bg-background">      
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-gradient-to-br from-primary/10 via-background to-primary/5">
         <div className="container mx-auto px-4 md:px-8">
@@ -225,14 +214,12 @@ export default function PracticeAreaDetailPage() {
             <Button size="lg" variant="secondary">
               Book Consultation
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900">
+            <Button size="lg" variant="outline" className="border-white text-slate-900 hover:bg-white hover:text-slate-900">
               Call Us Now
             </Button>
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

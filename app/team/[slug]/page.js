@@ -12,7 +12,7 @@ import { getTeamMemberBySlug } from '@/lib/data/team';
 
 export default function TeamMemberDetailPage() {
   const params = useParams();
-  const member = getTeamMemberBySlug(params.slug); 
+  const member = getTeamMemberBySlug(params.slug);
 
   if (!member) {
     return (
@@ -28,7 +28,7 @@ export default function TeamMemberDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">     
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative pt-10 pb-16 bg-linear-to-br from-primary/10 via-background to-primary/5">
         <div className="container mx-auto px-4 md:px-8">
@@ -36,14 +36,14 @@ export default function TeamMemberDetailPage() {
             <ArrowLeft size={20} />
             Back to Team
           </Link>
-          
+
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Profile Card */}
             <div className="lg:col-span-1">
               <Card className="sticky top-24 overflow-hidden">
                 <div className="aspect-square bg-slate-100">
-                  <img 
-                    src={member.image} 
+                  <img
+                    src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
@@ -52,7 +52,7 @@ export default function TeamMemberDetailPage() {
                   <Badge className="mb-3">{member.role}</Badge>
                   <h1 className="text-2xl font-bold mb-2">{member.name}</h1>
                   <p className="text-primary font-medium mb-6">{member.credentials}</p>
-                  
+
                   <div className="space-y-3 mb-6">
                     <a href={`mailto:${member.email}`} className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                       <Mail size={18} />
@@ -163,6 +163,23 @@ export default function TeamMemberDetailPage() {
                 </div>
               </Card>
 
+             {/* Notable Achievements */}
+              {member.notable && member.notable.length > 0 && (
+                <Card className="p-8 bg-primary/5 border-primary/20">
+                  <h3 className="text-2xl font-bold mb-6">Notable Achievements</h3>
+                  <ul className="space-y-3">
+                    {member.notable.map((achievement, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="mt-1 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                          <Award size={14} className="text-primary" />
+                        </div>
+                        <span className="leading-relaxed">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+
               {/* Publications */}
               {member.publications && member.publications.length > 0 && (
                 <Card className="p-8">
@@ -179,46 +196,7 @@ export default function TeamMemberDetailPage() {
                   </div>
                 </Card>
               )}
-
-              {/* Notable Achievements */}
-              {member.notable && member.notable.length > 0 && (
-                <Card className="p-8 bg-primary/5 border-primary/20">
-                  <h3 className="text-2xl font-bold mb-6">Notable Achievements</h3>
-                  <ul className="space-y-3">
-                    {member.notable.map((achievement, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <div className="mt-1 h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                          <Award size={14} className="text-primary" />
-                        </div>
-                        <span className="leading-relaxed">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section id="contact" className="py-20 bg-slate-900 text-white">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Work with {member.name.split(' ')[0]}?
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Schedule a consultation to discuss your legal needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary">
-              Book Consultation
-            </Button>
-            <a href={`mailto:${member.email}`}>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900">
-                Send Email
-              </Button>
-            </a>
           </div>
         </div>
       </section>

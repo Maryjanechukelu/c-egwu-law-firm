@@ -5,6 +5,7 @@ import { About } from '@/components/About';
 import { PracticeAreas } from '@/components/PracticeAreas';
 import { Testimonials } from '@/components/Testimonials';
 import { Contact } from '@/components/Contact';
+import { Articles } from '@/components/Articles';
 
 export default function Home() {
   const scrollToSection = (id) => {
@@ -20,6 +21,7 @@ export default function Home() {
       <About />
       <PracticeAreas />
       <Testimonials />
+      <Articles />
       <Contact />
     </div>
   );

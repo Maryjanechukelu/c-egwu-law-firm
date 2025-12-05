@@ -67,7 +67,7 @@ export default function TeamPage() {
                                         <h3 className="text-2xl font-bold mb-1">{member.name}</h3>
                                         <p className="text-primary font-medium mb-4">{member.credentials}</p>
                     
-                                        <p className="text-muted-foreground mb-6 leading-relaxed flex-grow">
+                                        <p className="text-muted-foreground mb-6 leading-relaxed grow">
                                             {member.shortBio}
                                         </p>
 

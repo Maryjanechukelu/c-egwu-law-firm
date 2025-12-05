@@ -35,9 +35,9 @@ export const Contact = () => {
               <div className="pt-8">
                 <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
                 <div className="flex gap-4">
-                  <a href="https://linkedin.com" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Linkedin size={20} /></a>
-                  <a href="https://instagram.com" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Instagram size={20} /></a>
-                  <a href="https://twitter.com" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Twitter size={20} /></a>
+                  <a href="https://www.linkedin.com/company/c-egwu-law-firm/" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Linkedin size={20} /></a>
+                  <a href="https://www.instagram.com/cegwu_law?utm_source=qr&igsh=M21nMjY5c2xoMzBq" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Instagram size={20} /></a>
+                  <a href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Twitter size={20} /></a>
                 </div>
               </div>
             </div>

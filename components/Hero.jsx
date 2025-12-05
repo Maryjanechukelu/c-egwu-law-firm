@@ -1,11 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Badge } from './ui/Badge';
 import { Button } from './ui/Button';
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-[80vh] overflow-hidden">
+    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-screen overflow-hidden"> 
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -17,7 +18,7 @@ export const Hero = () => {
           quality={85}
         />
         {/* Overlay to make text readable */}
-        <div className="absolute inset-0 bg-slate-900/70"></div>
+        <div className="absolute inset-0 bg-slate-900/50"></div>
       </div>
 
       {/* Abstract Background Shapes - Now on top of background image */}
@@ -36,12 +37,16 @@ export const Hero = () => {
           A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients when stakes are high.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="h-12 px-8 text-base cursor-pointer" onClick={() => scrollToSection('practice')}>
+          <Link href="/practice-areas">
+          <Button className="h-12 px-8 text-base cursor-pointer">
             Explore Our Practice
           </Button>
-          <Button variant="outline" className="h-12 px-8 text-base cursor-pointer" onClick={() => scrollToSection('contact')}>
+          </Link>
+          <Link href="#contact">
+          <Button variant="outline" className="h-12 px-8 text-base cursor-pointer">
             Contact Us
           </Button>
+           </Link>
         </div>
       </div>
     </section>
