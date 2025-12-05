@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from './ui/Badge';
-import { Button } from './ui/Button';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-screen overflow-hidden"> 
+    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-screen overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -38,15 +38,15 @@ export const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/practice-areas">
-          <Button className="h-12 px-8 text-base cursor-pointer">
-            Explore Our Practice
-          </Button>
+            <Button className="h-12 px-8 text-base cursor-pointer">
+              Explore Our Practice
+            </Button>
           </Link>
           <Link href="#contact">
-          <Button variant="outline" className="h-12 px-8 text-base cursor-pointer">
-            Contact Us
-          </Button>
-           </Link>
+            <Button variant="outline" className="h-12 px-8 text-base cursor-pointer">
+              Contact Us
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

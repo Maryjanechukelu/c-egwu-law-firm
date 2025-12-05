@@ -2,9 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight, ChevronRight } from 'lucide-react';
-import { Card } from './ui/Card';
-import { Button } from './ui/Button';
-import { Badge } from './ui/Badge';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 import { getRecentArticles } from '@/lib/data/articles';
 
 export const Articles = () => {
@@ -36,8 +36,8 @@ export const Articles = () => {
             <Link key={article.id} href={`/articles/${article.slug}`}>
               <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
                 <div className="aspect-video relative overflow-hidden bg-slate-100">
-                  <img 
-                    src={article.featuredImage} 
+                  <img
+                    src={article.featuredImage}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -45,7 +45,7 @@ export const Articles = () => {
                     <Badge>{article.category}</Badge>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                     <div className="flex items-center gap-1">
@@ -57,15 +57,15 @@ export const Articles = () => {
                       <span>{article.readTime}</span>
                     </div>
                   </div>
-                  
+
                   <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
                     {article.title}
                   </h3>
-                  
+
                   <p className="text-muted-foreground mb-4 line-clamp-2">
                     {article.excerpt}
                   </p>
-                  
+
                   <div className="flex items-center text-primary font-semibold group-hover:gap-2 transition-all">
                     Read More
                     <ChevronRight className="group-hover:translate-x-1 transition-transform" size={16} />

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card } from './ui/Card';
-import { Badge } from './ui/Badge';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
 
 export const Team = () => {
   return (
@@ -16,8 +16,8 @@ export const Team = () => {
           <Card className="overflow-hidden border-none shadow-xl bg-slate-50">
             <div className="md:flex h-full">
               <div className="md:w-2/5 h-64 md:h-auto bg-slate-200 relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Chidinma Egwu"
                   className="w-full h-full object-cover"
                 />
@@ -46,8 +46,8 @@ export const Team = () => {
           <Card className="overflow-hidden border-none shadow-xl bg-slate-50">
             <div className="md:flex h-full">
               <div className="md:w-2/5 h-64 md:h-auto bg-slate-200 relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Kingsley Chukwujekwu Ekwesianya"
                   className="w-full h-full object-cover"
                 />

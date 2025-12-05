@@ -1,14 +1,14 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { 
-  ArrowRight, 
-  Target, 
-  Eye, 
-  Heart, 
-  Award, 
-  Users, 
-  Scale, 
+import {
+  ArrowRight,
+  Target,
+  Eye,
+  Heart,
+  Award,
+  Users,
+  Scale,
   TrendingUp,
   CheckCircle,
   Briefcase,
@@ -16,9 +16,9 @@ import {
   Lightbulb,
   Globe
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { teamMembers } from '@/lib/data/team';
 
 export default function AboutPage() {
@@ -52,8 +52,8 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             <div className="relative">
               <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
                   alt="Law Firm Office"
                   className="w-full h-full object-cover"
                 />
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 <p className="text-lg">Years of Excellence in Legal Practice</p>
               </div>
             </div>
-            
+
             <div>
               <Badge className="mb-4">Our Story</Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -360,8 +360,8 @@ export default function AboutPage() {
 
               <div className="relative">
                 <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-2xl">
-                  <img 
-                    src="/about-us.png" 
+                  <img
+                    src="/about-us.png"
                     alt="Team Collaboration"
                     className="w-full h-full object-cover"
                   />
@@ -394,8 +394,8 @@ export default function AboutPage() {
                 <Card key={member.id} className="overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className="md:flex">
                     <div className="md:w-2/5 h-64 md:h-auto relative bg-slate-200">
-                      <img 
-                        src={member.image} 
+                      <img
+                        src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover"
                       />
@@ -488,6 +488,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-  </div>
+    </div>
   );
 }

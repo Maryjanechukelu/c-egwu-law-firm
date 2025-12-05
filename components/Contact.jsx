@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, MapPin, Linkedin, Instagram, Twitter } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 export const Contact = () => {
   return (
@@ -12,7 +12,7 @@ export const Contact = () => {
             <p className="text-slate-300 mb-8 text-lg">
               Ready to discuss your legal needs? We are here to provide the clarity and confidence you need.
             </p>
-            
+
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="bg-primary p-3 rounded-lg"><Mail /></div>
@@ -22,7 +22,7 @@ export const Contact = () => {
                   <p className="text-slate-400">contact@cegwulawfirm.com</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4">
                 <div className="bg-primary p-3 rounded-lg"><MapPin /></div>
                 <div>

@@ -2,11 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Mail, Linkedin, ChevronRight } from 'lucide-react';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { teamMembers } from '@/lib/data/team';
 
 export default function TeamPage() {
@@ -66,7 +64,7 @@ export default function TeamPage() {
                                         <Badge className="w-fit mb-3">{member.role}</Badge>
                                         <h3 className="text-2xl font-bold mb-1">{member.name}</h3>
                                         <p className="text-primary font-medium mb-4">{member.credentials}</p>
-                    
+
                                         <p className="text-muted-foreground mb-6 leading-relaxed grow">
                                             {member.shortBio}
                                         </p>

@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
-import { Card } from './ui/Card';
-import { Button } from './ui/Button';
-import { Badge } from './ui/Badge';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 import { testimonials } from '@/lib/data/testimonials';
 
 export const Testimonials = () => {
@@ -67,8 +67,8 @@ export const Testimonials = () => {
                             <Card
                                 key={`${testimonial.id}-${idx}`}
                                 className={`p-8 transition-all duration-500 ${idx === 0
-                                        ? 'scale-105 shadow-2xl border-2 border-primary/20'
-                                        : 'opacity-75 hover:opacity-100'
+                                    ? 'scale-105 shadow-2xl border-2 border-primary/20'
+                                    : 'opacity-75 hover:opacity-100'
                                     }`}
                             >
                                 <div className="flex items-start gap-4 mb-6">
@@ -160,8 +160,8 @@ export const Testimonials = () => {
                                 key={idx}
                                 onClick={() => goToSlide(idx)}
                                 className={`h-2 rounded-full transition-all ${idx === currentIndex
-                                        ? 'w-8 bg-primary'
-                                        : 'w-2 bg-primary/30 hover:bg-primary/50'
+                                    ? 'w-8 bg-primary'
+                                    : 'w-2 bg-primary/30 hover:bg-primary/50'
                                     }`}
                                 aria-label={`Go to testimonial ${idx + 1}`}
                             />

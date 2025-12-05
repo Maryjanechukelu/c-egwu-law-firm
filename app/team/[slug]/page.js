@@ -3,9 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ArrowLeft, Mail, Phone, Linkedin, Award, BookOpen, Globe, Briefcase } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { getTeamMemberBySlug } from '@/lib/data/team';
 
 export default function TeamMemberDetailPage() {
@@ -161,7 +161,7 @@ export default function TeamMemberDetailPage() {
                 </div>
               </Card>
 
-             {/* Notable Achievements */}
+              {/* Notable Achievements */}
               {member.notable && member.notable.length > 0 && (
                 <Card className="p-8 bg-primary/5 border-primary/20">
                   <h3 className="text-2xl font-bold mb-6">Notable Achievements</h3>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

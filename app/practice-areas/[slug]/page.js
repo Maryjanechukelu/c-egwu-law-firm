@@ -3,9 +3,9 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ChevronRight, CheckCircle, ArrowLeft, Briefcase, Cpu, Scale, Users, ShieldCheck, Gavel } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { getPracticeAreaBySlug, getRelatedPracticeAreas } from '@/lib/data/practiceAreas';
 
 const iconMap = {
@@ -19,7 +19,7 @@ const iconMap = {
 
 export default function PracticeAreaDetailPage() {
   const params = useParams();
-  const practiceArea = getPracticeAreaBySlug(params.slug); 
+  const practiceArea = getPracticeAreaBySlug(params.slug);
 
   if (!practiceArea) {
     return (
@@ -38,7 +38,7 @@ export default function PracticeAreaDetailPage() {
   const relatedPractices = getRelatedPracticeAreas(practiceArea.slug, practiceArea.relatedPractices);
 
   return (
-    <div className="min-h-screen bg-background">      
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 bg-gradient-to-br from-primary/10 via-background to-primary/5">
         <div className="container mx-auto px-4 md:px-8">
@@ -46,7 +46,7 @@ export default function PracticeAreaDetailPage() {
             <ArrowLeft size={20} />
             Back to Practice Areas
           </Link>
-          
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-3 mb-6">
@@ -55,24 +55,24 @@ export default function PracticeAreaDetailPage() {
                 </div>
                 <Badge className="text-base px-4 py-2">Practice Area</Badge>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 {practiceArea.title}
               </h1>
-              
+
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 {practiceArea.fullDescription}
               </p>
-              
+
               <Button size="lg" onClick={() => scrollToSection('contact')}>
                 Schedule Consultation
               </Button>
             </div>
-            
+
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src={practiceArea.heroImage} 
+                <img
+                  src={practiceArea.heroImage}
                   alt={practiceArea.title}
                   className="w-full h-full object-cover"
                 />

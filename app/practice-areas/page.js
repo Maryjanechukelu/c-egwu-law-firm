@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, Briefcase, Cpu, Scale, Users, ShieldCheck, Gavel, ArrowRight, CheckCircle, Linkedin, Instagram, Twitter} from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { ChevronRight, Briefcase, Cpu, Scale, Users, ShieldCheck, Gavel, ArrowRight, CheckCircle, Linkedin, Instagram, Twitter } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { practiceAreas } from '@/lib/data/practiceAreas';
 
 const iconMap = {
@@ -101,13 +101,13 @@ export default function PracticeAreasPage() {
                                     onMouseLeave={() => setHoveredCard(null)}
                                 >
                                     <Card className={`h-full p-8 transition-all duration-300 cursor-pointer border-2 ${hoveredCard === index
-                                            ? 'shadow-2xl -translate-y-2 border-primary bg-white'
-                                            : 'shadow-md hover:shadow-xl hover:-translate-y-1 border-transparent bg-white'
+                                        ? 'shadow-2xl -translate-y-2 border-primary bg-white'
+                                        : 'shadow-md hover:shadow-xl hover:-translate-y-1 border-transparent bg-white'
                                         }`}>
                                         {/* Icon */}
                                         <div className={`mb-6 inline-block p-4 rounded-xl transition-colors duration-300 ${hoveredCard === index
-                                                ? 'bg-primary text-white'
-                                                : 'bg-primary/10 text-primary'
+                                            ? 'bg-primary text-white'
+                                            : 'bg-primary/10 text-primary'
                                             }`}>
                                             {IconComponent && <IconComponent size={32} />}
                                         </div>
@@ -141,8 +141,8 @@ export default function PracticeAreasPage() {
 
                                         {/* CTA */}
                                         <div className={`flex items-center font-semibold transition-all duration-300 ${hoveredCard === index
-                                                ? 'text-primary gap-3'
-                                                : 'text-primary gap-1'
+                                            ? 'text-primary gap-3'
+                                            : 'text-primary gap-1'
                                             }`}>
                                             Learn More
                                             <ChevronRight className="transition-transform duration-300" size={20} />
@@ -351,15 +351,15 @@ export default function PracticeAreasPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="#contact" target="_blank">
-                        <Button size="lg" variant="secondary">
-                            Book Consultation
-                            <ArrowRight className="ml-2" size={20} />
-                        </Button>
+                            <Button size="lg" variant="secondary">
+                                Book Consultation
+                                <ArrowRight className="ml-2" size={20} />
+                            </Button>
                         </Link>
                         <Link href="tel:+1234567890" target="_blank">
-                        <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-slate-900">
-                            Call Us Now
-                        </Button>
+                            <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-slate-900">
+                                Call Us Now
+                            </Button>
                         </Link>
                     </div>
 
@@ -381,7 +381,7 @@ export default function PracticeAreasPage() {
                                 <div className="flex items-center gap-4 mt-2">
                                     <Link href="https://www.linkedin.com/company/c-egwu-law-firm/" target="_blank" className="bg-gray-200 p-3 rounded-full text-primary hover:text-primary"><Linkedin /></Link>
                                     <Link href="https://www.instagram.com/cegwu_law?utm_source=qr&igsh=M21nMjY5c2xoMzBq" target="_blank" className="bg-gray-200 p-3 rounded-full text-primary hover:text-primary"><Instagram /></Link>
-                                    <Link href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08"  target="_blank" className="bg-gray-200 p-3 rounded-full text-primary hover:text-primary"><Twitter /></Link>
+                                    <Link href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" target="_blank" className="bg-gray-200 p-3 rounded-full text-primary hover:text-primary"><Twitter /></Link>
                                 </div>
                             </div>
                         </div>
