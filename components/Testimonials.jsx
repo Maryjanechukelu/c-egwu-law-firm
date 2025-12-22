@@ -72,7 +72,7 @@ export const Testimonials = () => {
                                     }`}
                             >
                                 <div className="flex items-start gap-4 mb-6">
-                                    <Quote className="text-primary flex-shrink-0" size={32} />
+                                    <Quote className="text-primary shrink-0" size={32} />
                                     <div className="flex gap-1">
                                         {[...Array(testimonial.rating)].map((_, i) => (
                                             <Star key={i} className="fill-amber-400 text-amber-400" size={16} />
@@ -110,7 +110,7 @@ export const Testimonials = () => {
                 <div className="md:hidden relative">
                     <Card className="p-8 mb-8">
                         <div className="flex items-start gap-4 mb-6">
-                            <Quote className="text-primary flex-shrink-0" size={32} />
+                            <Quote className="text-primary shrink-0" size={32} />
                             <div className="flex gap-1">
                                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                                     <Star key={i} className="fill-amber-400 text-amber-400" size={16} />
@@ -143,36 +143,48 @@ export const Testimonials = () => {
                 </div>
 
                 {/* Navigation Controls */}
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex items-center justify-center mt-6">
+                    {/* Desktop Previous */}
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
                         onClick={goToPrevious}
-                        className="rounded-full h-12 w-12"
+                        className="hidden md:flex rounded-full h-10 w-10"
+                        aria-label="Previous slide"
                     >
                         <ChevronLeft size={20} />
                     </Button>
 
                     {/* Dots Indicator */}
-                    <div className="flex gap-2">
-                        {testimonials.map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => goToSlide(idx)}
-                                className={`h-2 rounded-full transition-all ${idx === currentIndex
-                                    ? 'w-8 bg-primary'
-                                    : 'w-2 bg-primary/30 hover:bg-primary/50'
-                                    }`}
-                                aria-label={`Go to testimonial ${idx + 1}`}
-                            />
-                        ))}
+                    <div className="flex items-center justify-center gap-2 md:gap-3 mx-4">
+                        {testimonials.map((_, idx) => {
+                            const isActive = idx === currentIndex
+
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={() => goToSlide(idx)}
+                                    aria-label={`Go to testimonial ${idx + 1}`}
+                                    className={`
+                                                rounded-full
+                                                transition-all
+                                                touch-manipulation
+                        ${isActive
+                                            ? 'bg-primary w-2 h-2 md:w-8 md:h-2'
+                                            : 'bg-primary/40 w-1.5 h-1.5 md:w-2 md:h-2 hover:bg-primary/60'}
+                    `}
+                                />
+                            )
+                        })}
                     </div>
 
+                    {/* Desktop Next */}
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
                         onClick={goToNext}
-                        className="rounded-full h-12 w-12"
+                        className="hidden md:flex rounded-full h-10 w-10"
+                        aria-label="Next slide"
                     >
                         <ChevronRight size={20} />
                     </Button>

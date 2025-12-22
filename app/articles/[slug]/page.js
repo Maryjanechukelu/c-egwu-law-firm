@@ -43,7 +43,7 @@ export default function ArticleDetailPage() {
     return (
         <div className="min-h-screen bg-background">
             {/* Article Header */}
-            <section className="relative pt-24 pb-12 bg-linear-to-br from-primary/10 via-background to-primary/5">
+            <section className="relative pt-5 md:pt-24 pb-8 md:pb-12 bg-linear-to-br from-primary/10 via-background to-primary/5">
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="max-w-4xl mx-auto">
                         <Link href="/articles" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">

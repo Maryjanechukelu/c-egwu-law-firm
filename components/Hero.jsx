@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-screen overflow-hidden">
+    <section id="home" className="relative pt-16 pb-32 flex items-center justify-center min-h-[80vh] md:min-h-screen overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

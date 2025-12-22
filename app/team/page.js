@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Mail, Linkedin, ChevronRight } from 'lucide-react';
+import { ArrowRight, Mail, Linkedin, ChevronRight, Scale, Target, Handshake, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -39,25 +39,46 @@ export default function TeamPage() {
                                             alt={member.name}
                                             className="w-full h-full object-cover"
                                         />
-                                        <div className="absolute bottom-4 left-4 right-4">
-                                            <div className="flex gap-2">
+
+                                        <div className="absolute bottom-3 left-3 right-3">
+                                            <div className="flex items-center gap-2">
                                                 <a
                                                     href={`mailto:${member.email}`}
-                                                    className="p-2 bg-white/90 backdrop-blur rounded-full hover:bg-white transition-colors"
+                                                    aria-label="Send email"
+                                                    className="
+                                                        flex items-center justify-center
+                                                        h-8 w-8 md:h-10 md:w-10
+                                                        rounded-full
+                                                        bg-white/90 backdrop-blur
+                                                        hover:bg-white
+                                                        transition-colors
+                                                    "
                                                 >
-                                                    <Mail size={18} className="text-primary" />
+                                                    <Mail size={14} className="md:hidden text-primary" />
+                                                    <Mail size={16} className="hidden md:block text-primary" />
                                                 </a>
+
                                                 <a
                                                     href={member.linkedin}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="p-2 bg-white/90 backdrop-blur rounded-full hover:bg-white transition-colors"
+                                                    aria-label="View LinkedIn profile"
+                                                    className="
+                                                        flex items-center justify-center
+                                                        h-8 w-8 md:h-10 md:w-10
+                                                        rounded-full
+                                                        bg-white/90 backdrop-blur
+                                                        hover:bg-white
+                                                        transition-colors
+                                                "
                                                 >
-                                                    <Linkedin size={18} className="text-primary" />
+                                                    <Linkedin size={14} className="md:hidden text-primary" />
+                                                    <Linkedin size={16} className="hidden md:block text-primary" />
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     {/* Content Section */}
                                     <div className="md:w-3/5 p-8 flex flex-col">
@@ -112,29 +133,29 @@ export default function TeamPage() {
                     </div>
 
                     <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                        <Card className="p-6 text-center">
-                            <div className="text-4xl mb-4">⚖️</div>
+                        <Card className="p-6 items-center text-center">
+                            <div className="mb-2 flex items-center text-primary"><Scale className="w-10 h-10" /></div>
                             <h3 className="text-xl font-bold mb-2">Integrity</h3>
                             <p className="text-muted-foreground text-sm">
                                 Unwavering ethical standards in every engagement
                             </p>
                         </Card>
-                        <Card className="p-6 text-center">
-                            <div className="text-4xl mb-4">🎯</div>
+                        <Card className="p-6 items-center text-center">
+                            <div className="mb-2 flex items-center text-primary"><Target className="w-10 h-10" /></div>
                             <h3 className="text-xl font-bold mb-2">Excellence</h3>
                             <p className="text-muted-foreground text-sm">
                                 Commitment to delivering superior legal solutions
                             </p>
                         </Card>
-                        <Card className="p-6 text-center">
-                            <div className="text-4xl mb-4">🤝</div>
+                        <Card className="p-6 flex items-center text-center">
+                            <div className="mb-2 flex items-center text-primary"><Handshake className="w-10 h-10" /></div>
                             <h3 className="text-xl font-bold mb-2">Partnership</h3>
                             <p className="text-muted-foreground text-sm">
                                 Collaborative approach with clients as true partners
                             </p>
                         </Card>
-                        <Card className="p-6 text-center">
-                            <div className="text-4xl mb-4">💡</div>
+                        <Card className="p-6 items-center text-center">
+                            <div className="mb-2 flex items-center text-primary"><Lightbulb className="w-10 h-10" /></div>
                             <h3 className="text-xl font-bold mb-2">Innovation</h3>
                             <p className="text-muted-foreground text-sm">
                                 Creative solutions for complex legal challenges
