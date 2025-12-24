@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY); 
-    
+
     try {
         const body = await request.json();
         const { firstName, lastName, email, practiceArea, message } = body;
@@ -20,8 +20,8 @@ export async function POST(request) {
 
         // Send to your firm
         await resend.emails.send({
-            from: 'C. Egwu Law Firm <noreply@cegwulawfirm.com>',
-            to: 'info@cegwulawfirm.com',
+            from: 'C. Egwu Law Firm <onboarding@resend.dev>',
+            to: 'maryjanechukelu@gmail.com',
             subject: `New Contact Form Submission - ${practiceArea}`,
             html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -68,7 +68,7 @@ export async function POST(request) {
 
         // Auto-reply
         await resend.emails.send({
-            from: 'C. Egwu Law Firm <noreply@cegwulawfirm.com>',
+            from: 'C. Egwu Law Firm <onboarding@resend.dev>',
             to: email,
             subject: 'Thank you for contacting C. Egwu Law Firm',
             html: `
