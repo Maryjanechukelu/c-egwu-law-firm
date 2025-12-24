@@ -16,7 +16,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
     });
 
     // Your Calendly link - Replace with your actual link
-    const calendlyUrl = "https://calendly.com/codechicenterprise/30min";
+    const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
 
     const handleChange = (e) => {
         setFormData({
@@ -179,9 +179,9 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
                             </div>
 
                             <div className="space-y-4">
-                                <p className="text-sm text-muted-foreground">
+                                {/* <p className="text-sm text-muted-foreground">
                                     Choose your preferred option to schedule a consultation:
-                                </p>
+                                </p> */}
 
                                 {/* Calendly Option */}
                                 <button
@@ -202,7 +202,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
                                 </button>
 
                                 {/* Email Option */}
-                                <button
+                                {/* <button
                                     onClick={() => {
                                         const subject = `Consultation Request - ${formData.practiceArea}`;
                                         const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0APractice Area: ${formData.practiceArea}%0D%0A%0D%0ANotes: ${formData.notes}`;
@@ -222,7 +222,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
                                             </p>
                                         </div>
                                     </div>
-                                </button>
+                                </button> */}
                             </div>
 
                             <div className="flex gap-3 pt-4">

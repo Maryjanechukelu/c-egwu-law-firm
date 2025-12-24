@@ -31,7 +31,7 @@ export const Hero = () => {
         <Badge className="mb-6 px-4 py-1 text-sm">Smart Law. Real Solutions.</Badge>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">
           Precision. Commercial Awareness.
-          <span className="text-blue-700 block mt-2">Unwavering Confidence.</span>
+          <span className="text-black block mt-2">Unwavering Confidence.</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-100 mb-10 max-w-2xl mx-auto leading-relaxed">
           A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients when stakes are high.

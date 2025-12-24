@@ -94,7 +94,7 @@ export const WhatsAppButton = () => {
                     <X size={28} />
                 ) : (
                     <>
-                            <img src="/whatsapp-50.svg" alt="WhatsApp Icon" className="w-10 h-10 text-white" />
+                            <img src="/whatsapp-50.svg" alt="WhatsApp Icon" className="w-12 h-12 text-white" />
                         <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
                     </>
                 )}
