@@ -1,8 +1,64 @@
-import React from 'react';
-import { Mail, MapPin, Linkedin, Instagram, Twitter } from 'lucide-react';
+'use client';
+import React, { useState } from 'react';
+import { Mail, MapPin, Linkedin, Instagram, Twitter, Loader2, CheckCircle } from 'lucide-react';
 import { Button } from './ui/button';
 
 export const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    practiceArea: 'Corporate Law',
+    message: ''
+  });
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setStatus('success');
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          practiceArea: 'Corporate Law',
+          message: ''
+        });
+        setStatus('idle');
+      }, 3000);
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(error.message);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-slate-900 text-white">
       <div className="container mx-auto px-4 md:px-8">
@@ -18,8 +74,9 @@ export const Contact = () => {
                 <div className="bg-primary p-3 rounded-lg"><Mail /></div>
                 <div>
                   <h4 className="font-semibold text-lg">Email Us</h4>
-                  <p className="text-slate-400">info@cegwulawfirm.com</p>
-                  <p className="text-slate-400">contact@cegwulawfirm.com</p>
+                  <a href="mailto:info@cegwulawfirm.com" className="text-slate-400 hover:text-white transition-colors">info@cegwulawfirm.com</a>
+                  <br />
+                  <a href="mailto:contact@cegwulawfirm.com" className="text-slate-400 hover:text-white transition-colors">contact@cegwulawfirm.com</a>
                 </div>
               </div>
 
@@ -35,9 +92,30 @@ export const Contact = () => {
               <div className="pt-8">
                 <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
                 <div className="flex gap-4">
-                  <a href="https://www.linkedin.com/company/c-egwu-law-firm/" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Linkedin size={20} /></a>
-                  <a href="https://www.instagram.com/cegwu_law?utm_source=qr&igsh=M21nMjY5c2xoMzBq" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Instagram size={20} /></a>
-                  <a href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"><Twitter size={20} /></a>
+                  <a
+                    href="https://www.linkedin.com/company/c-egwu-law-firm/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
+                  >
+                    <Linkedin size={20} />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/cegwu_law?utm_source=qr&igsh=M21nMjY5c2xoMzBq"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
+                  >
+                    <Instagram size={20} />
+                  </a>
+                  <a
+                    href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
+                  >
+                    <Twitter size={20} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -45,38 +123,103 @@ export const Contact = () => {
 
           <div className="bg-white text-slate-900 p-8 rounded-xl shadow-2xl">
             <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">First Name</label>
-                  <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" placeholder="Jane" />
+
+            {status === 'success' ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
+                <h4 className="text-xl font-semibold mb-2">Message Sent!</h4>
+                <p className="text-muted-foreground text-center">
+                  Thank you for contacting us. We'll get back to you shortly.
+                </p>
+              </div>
+            ) : (
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">First Name *</label>
+                    <input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      placeholder="Jane"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Last Name *</label>
+                    <input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      placeholder="Doe"
+                      required
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Last Name</label>
-                  <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" placeholder="Doe" />
+                  <label className="text-sm font-medium">Email *</label>
+                  <input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    placeholder="jane@company.com"
+                    required
+                  />
                 </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Email</label>
-                <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" type="email" placeholder="jane@company.com" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Practice Area</label>
-                <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <option>Corporate Law</option>
-                  <option>Technology & Media</option>
-                  <option>Intellectual Property</option>
-                  <option>Employment</option>
-                  <option>Private Wealth</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Message</label>
-                <textarea className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" placeholder="How can we help you?" />
-              </div>
-              <Button className="w-full text-lg h-12">Send Message</Button>
-            </form>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Practice Area</label>
+                  <select
+                    name="practiceArea"
+                    value={formData.practiceArea}
+                    onChange={handleChange}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <option>Corporate Law</option>
+                    <option>Technology & Media</option>
+                    <option>Intellectual Property</option>
+                    <option>Employment</option>
+                    <option>Private Wealth</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Message *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    placeholder="How can we help you?"
+                    required
+                  />
+                </div>
+
+                {status === 'error' && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                    {errorMessage || 'Failed to send message. Please try again.'}
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  className="w-full text-lg h-12"
+                  disabled={status === 'loading'}
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>

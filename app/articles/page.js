@@ -1,21 +1,24 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Calendar, Clock, ChevronRight, Search, Filter } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Calendar, Clock, ChevronRight, Search, Filter, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { articles } from '@/lib/data/articles';
+import { articlesMetadata, getCategories } from '@/lib/data/articles';
+import { authors } from '@/lib/data/articles/authors';
 
 export default function ArticlesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
-  // Get unique categories
-  const categories = ['all', ...new Set(articles.map(article => article.category))];
+  // Get categories from the new helper function
+  const allCategories = ['all', ...getCategories()];
 
   // Filter articles
-  const filteredArticles = articles.filter(article => {
+  const filteredArticles = articlesMetadata.filter(article => {
     const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory;
     const matchesSearch = searchQuery === '' ||
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -25,12 +28,44 @@ export default function ArticlesPage() {
   });
 
   // Featured article (most recent)
-  const featuredArticle = articles[0];
+  const featuredArticle = articlesMetadata[0];
+  const featuredAuthor = featuredArticle ? authors[featuredArticle.authorSlug] : null;
+
+  // Fallback UI when no articles exist at all
+  if (!articlesMetadata || articlesMetadata.length === 0) {
+    return (
+      <div className="min-h-screen bg-background">
+        <section className="relative pt-20 pb-32">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <FileText size={48} className="text-slate-400" />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                No Articles Available
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8">
+                We're working on creating insightful legal content for you. Please check back soon.
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Link href="/">
+                  <Button variant="outline">Go Home</Button>
+                </Link>
+                <Link href="/contact">
+                  <Button>Contact Us</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative pt-24 md:pt-10 pb-16 md:pb-8 bg-linear-to-br from-primary/5 via-background to-primary/5">
+      <section className="relative pt-6 md:pt-10 pb-5 md:pb-8 bg-linear-to-br from-primary/5 via-background to-primary/5">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-3xl">
             <Badge className="mb-4">Legal Insights</Badge>
@@ -45,15 +80,18 @@ export default function ArticlesPage() {
       </section>
 
       {/* Featured Article */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mb-8">
-            <Badge className="mb-2">Featured Article</Badge>
-            <h2 className="text-2xl font-bold">Latest Insights</h2>
-          </div>
+      {featuredArticle && (
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="mb-8">
+              <Badge className="mb-2">Featured Article</Badge>
+              <h2 className="text-2xl font-bold">Latest Insights</h2>
+            </div>
 
-          <Link href={`/articles/${featuredArticle.slug}`}>
-            <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 group">
+            <Card
+              onClick={() => router.push(`/articles/${featuredArticle.slug}`)}
+              className="overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="relative aspect-[16/10] lg:aspect-auto bg-slate-100">
                   <img
@@ -86,12 +124,20 @@ export default function ArticlesPage() {
                     {featuredArticle.excerpt}
                   </p>
 
-                  <div className="mb-6">
-                    <p className="text-sm text-muted-foreground mb-2">Written by</p>
-                    <Link href={`/team/${featuredArticle.authorSlug}`} className="font-semibold hover:text-primary transition-colors">
-                      {featuredArticle.author}
-                    </Link>
-                  </div>
+                  {featuredAuthor && (
+                    <div className="mb-6">
+                      <p className="text-sm text-muted-foreground mb-2">Written by</p>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/team/${featuredArticle.authorSlug}`);
+                        }}
+                        className="font-semibold hover:text-primary transition-colors text-left"
+                      >
+                        {featuredAuthor.name}
+                      </button>
+                    </div>
+                  )}
 
                   <div className="flex items-center text-primary font-semibold group-hover:gap-3 transition-all">
                     Read Full Article
@@ -100,9 +146,9 @@ export default function ArticlesPage() {
                 </div>
               </div>
             </Card>
-          </Link>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* Search and Filter */}
       <section className="py-8 bg-slate-50 sticky top-16 z-40 border-b">
@@ -123,7 +169,7 @@ export default function ArticlesPage() {
             {/* Category Filter */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
               <Filter size={20} className="text-muted-foreground flex-shrink-0" />
-              {categories.map((category) => (
+              {allCategories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? 'default' : 'outline'}
@@ -144,8 +190,19 @@ export default function ArticlesPage() {
         <div className="container mx-auto px-4 md:px-8">
           {filteredArticles.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-xl text-muted-foreground mb-4">No articles found matching your criteria.</p>
-              <Button variant="outline" onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}>
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-slate-200 flex items-center justify-center">
+                <Search size={40} className="text-slate-400" />
+              </div>
+              <p className="text-xl text-muted-foreground mb-4">
+                No articles found matching your criteria.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+              >
                 Clear Filters
               </Button>
             </div>
@@ -159,9 +216,15 @@ export default function ArticlesPage() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredArticles.map((article) => (
-                  <Link key={article.id} href={`/articles/${article.slug}`}>
-                    <Card className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                {filteredArticles.map((article) => {
+                  const author = authors[article.authorSlug];
+
+                  return (
+                    <Card
+                      key={article.id}
+                      onClick={() => router.push(`/articles/${article.slug}`)}
+                      className="h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                    >
                       <div className="aspect-video relative overflow-hidden bg-slate-100">
                         <img
                           src={article.featuredImage}
@@ -194,9 +257,17 @@ export default function ArticlesPage() {
                         </p>
 
                         <div className="pt-4 border-t">
-                          <Link href={`/team/${article.authorSlug}`} className="text-sm font-medium hover:text-primary transition-colors">
-                            By {article.author}
-                          </Link>
+                          {author && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/team/${article.authorSlug}`);
+                              }}
+                              className="text-sm font-medium hover:text-primary transition-colors text-left"
+                            >
+                              By {author.name}
+                            </button>
+                          )}
                         </div>
 
                         <div className="flex items-center text-primary font-semibold mt-4 group-hover:gap-2 transition-all">
@@ -205,8 +276,8 @@ export default function ArticlesPage() {
                         </div>
                       </div>
                     </Card>
-                  </Link>
-                ))}
+                  );
+                })}
               </div>
             </>
           )}

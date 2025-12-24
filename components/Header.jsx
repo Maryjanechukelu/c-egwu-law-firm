@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
+import { BookConsultationModal } from '@/components/BookConsultationModal';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const NavLink = ({ to, children }) => (
     <Link
@@ -61,11 +63,9 @@ export const Header = () => {
           <NavLink to="practice-areas">Practice Areas</NavLink>
           <NavLink to="team">Team</NavLink>
           <NavLink to="articles">Articles</NavLink>
-          <Link href="/#contact">
-            <Button>
-              Book Consultation
-            </Button>
-          </Link>
+          <Button onClick={() => setIsModalOpen(true)}>
+            Book Consultation
+          </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -85,13 +85,18 @@ export const Header = () => {
           <MobileNavLink to="practice-areas">Practice Areas</MobileNavLink>
           <MobileNavLink to="team">Team</MobileNavLink>
           <MobileNavLink to="articles">Articles</MobileNavLink>
-          <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
-            <Button className="w-full">
+          <Link onClick={() => setIsMenuOpen(false)}>
+            <Button onClick={() => setIsModalOpen(true)} className="w-full">
               Book Consultation
             </Button>
           </Link>
         </div>
       )}
+      <BookConsultationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        className="z-60 "
+      />
     </header>
   );
 };

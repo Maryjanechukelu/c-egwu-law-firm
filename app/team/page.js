@@ -1,13 +1,16 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Mail, Linkedin, ChevronRight, Scale, Target, Handshake, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { teamMembers } from '@/lib/data/team';
+import { BookConsultationModal } from '@/components/BookConsultationModal';
 
 export default function TeamPage() {
+     const [isModalOpen, setIsModalOpen] = useState(false);
+    
     return (
         <div className="min-h-screen bg-background">
             {/* Hero Section */}
@@ -174,12 +177,17 @@ export default function TeamPage() {
                     <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
                         Contact our team today to discuss how we can help achieve your legal objectives.
                     </p>
-                    <Button size="lg" variant="secondary">
+                    <Button size="lg" variant="secondary"  onClick={() => setIsModalOpen(true)}>
                         Schedule a Meeting
                         <ArrowRight className="ml-2" size={20} />
                     </Button>
                 </div>
             </section>
+            <BookConsultationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                className=""
+            />
         </div>
     );
 }
