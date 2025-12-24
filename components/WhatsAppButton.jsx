@@ -87,7 +87,7 @@ export const WhatsAppButton = () => {
             {/* WhatsApp Floating Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-4 md:right-8 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl transition-all hover:scale-110 z-50 group"
+                className="fixed bottom-6 right-4 md:right-8 bg-green-600 hover:bg-green-700 text-white rounded-full p-1 shadow-2xl transition-all hover:scale-110 z-50 group"
                 aria-label="Chat on WhatsApp"
             >
                 {isOpen ? (
