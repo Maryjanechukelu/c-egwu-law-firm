@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Mail, MapPin, Linkedin, Instagram, Twitter, Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 
 export const Contact = () => {
@@ -11,14 +11,11 @@ export const Contact = () => {
     practiceArea: 'Corporate Law',
     message: ''
   });
-  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -60,162 +57,115 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900 text-white">
+    <section id="contact" className="py-24 bg-slate-950 text-white border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24">
+
+          {/* Info Side */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
-            <p className="text-slate-300 mb-8 text-lg">
-              Ready to discuss your legal needs? We are here to provide the clarity and confidence you need.
+            <span className="text-amber-500 font-bold tracking-widest text-sm uppercase mb-4 block">Contact Us</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's Discuss Your Legal Needs.</h2>
+            <p className="text-slate-400 text-lg mb-12 max-w-md leading-relaxed">
+              We provide clarity and confidence when the stakes are high. Reach out to schedule a consultation with our team.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-primary p-3 rounded-lg"><Mail /></div>
-                <div>
-                  <h4 className="font-semibold text-lg">Email Us</h4>
-                  <a href="mailto:info@cegwulawfirm.com" className="text-slate-400 hover:text-white transition-colors">info@cegwulawfirm.com</a>
-                  <br />
-                  <a href="mailto:contact@cegwulawfirm.com" className="text-slate-400 hover:text-white transition-colors">contact@cegwulawfirm.com</a>
-                </div>
+            <div className="space-y-8">
+              <div>
+                <h4 className="text-white font-serif text-xl mb-1">Office</h4>
+                <p className="text-slate-400">Lagos Free Trade Zone<br />Nigeria</p>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="bg-primary p-3 rounded-lg"><MapPin /></div>
-                <div>
-                  <h4 className="font-semibold text-lg">Visit Us</h4>
-                  <p className="text-slate-400">Lagos Free Trade Zone</p>
-                  <p className="text-slate-400">Nigeria</p>
-                </div>
-              </div>
-
-              <div className="pt-8">
-                <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.linkedin.com/company/c-egwu-law-firm/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
-                  >
-                    <Linkedin size={20} />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/cegwu_law?utm_source=qr&igsh=M21nMjY5c2xoMzBq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
-                  >
-                    <Instagram size={20} />
-                  </a>
-                  <a
-                    href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-slate-800 p-3 rounded-full hover:bg-primary transition-colors"
-                  >
-                    <Twitter size={20} />
-                  </a>
-                </div>
+              <div>
+                <h4 className="text-white font-serif text-xl mb-1">Email</h4>
+                <a href="mailto:inquires@cegwulawfirm.com" className="text-slate-400 hover:text-amber-500 transition-colors">inquires@cegwulawfirm.com</a>
               </div>
             </div>
           </div>
 
-          <div className="bg-white text-slate-900 p-8 rounded-xl shadow-2xl">
-            <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-
+          {/* Form Side */}
+          <div className="bg-slate-900 p-8 md:p-10 border border-slate-800">
             {status === 'success' ? (
-              <div className="flex flex-col items-center justify-center py-12">
-                <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
-                <h4 className="text-xl font-semibold mb-2">Message Sent!</h4>
-                <p className="text-muted-foreground text-center">
-                  Thank you for contacting us. We'll get back to you shortly.
-                </p>
+              <div className="h-full flex flex-col items-center justify-center text-center min-h-[400px]">
+                <CheckCircle className="w-16 h-16 text-emerald-500 mb-6" />
+                <h3 className="text-2xl font-serif font-bold mb-2">Message Received</h3>
+                <p className="text-slate-400">We will be in touch shortly.</p>
               </div>
             ) : (
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">First Name *</label>
+                    <label className="text-xs uppercase tracking-wider text-slate-500">First Name</label>
                     <input
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      placeholder="Jane"
+                      className="w-full bg-transparent border-b border-slate-700 py-2 text-white focus:border-amber-500 focus:outline-none transition-colors rounded-none placeholder-slate-700"
+                      placeholder="ENTER FIRST NAME"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Last Name *</label>
+                    <label className="text-xs uppercase tracking-wider text-slate-500">Last Name</label>
                     <input
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      placeholder="Doe"
+                      className="w-full bg-transparent border-b border-slate-700 py-2 text-white focus:border-amber-500 focus:outline-none transition-colors rounded-none placeholder-slate-700"
+                      placeholder="ENTER LAST NAME"
                       required
                     />
                   </div>
                 </div>
+
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Email *</label>
+                  <label className="text-xs uppercase tracking-wider text-slate-500">Email Address</label>
                   <input
                     name="email"
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="jane@company.com"
+                    className="w-full bg-transparent border-b border-slate-700 py-2 text-white focus:border-amber-500 focus:outline-none transition-colors rounded-none placeholder-slate-700"
+                    placeholder="ENTER EMAIL ADDRESS"
                     required
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Practice Area</label>
+                  <label className="text-xs uppercase tracking-wider text-slate-500">Practice Area</label>
                   <select
                     name="practiceArea"
                     value={formData.practiceArea}
                     onChange={handleChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="w-full bg-transparent border-b border-slate-700 py-2 text-white focus:border-amber-500 focus:outline-none transition-colors rounded-none"
                   >
-                    <option>Corporate Law</option>
-                    <option>Technology & Media</option>
-                    <option>Intellectual Property</option>
-                    <option>Employment</option>
-                    <option>Private Wealth</option>
-                    <option>Other</option>
+                    <option className="bg-slate-900">Corporate Law</option>
+                    <option className="bg-slate-900">Technology & Media</option>
+                    <option className="bg-slate-900">Intellectual Property</option>
+                    <option className="bg-slate-900">Employment</option>
+                    <option className="bg-slate-900">Other</option>
                   </select>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Message *</label>
+
+                <div className="space-y-2 pt-4">
+                  <label className="text-xs uppercase tracking-wider text-slate-500">Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    placeholder="How can we help you?"
+                    className="w-full bg-transparent border-b border-slate-700 py-2 text-white focus:border-amber-500 focus:outline-none transition-colors rounded-none min-h-[100px] placeholder-slate-700"
+                    placeholder="TELL US ABOUT YOUR CASE"
                     required
                   />
                 </div>
 
-                {status === 'error' && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-                    {errorMessage || 'Failed to send message. Please try again.'}
-                  </div>
-                )}
-
                 <Button
                   type="submit"
-                  className="w-full text-lg h-12"
+                  className="w-full bg-white text-slate-950 hover:bg-amber-500 hover:text-white transition-all h-14 text-base font-bold uppercase tracking-widest mt-8 rounded-none"
                   disabled={status === 'loading'}
                 >
                   {status === 'loading' ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
-                    </>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
-                    'Send Message'
+                    <span className="flex items-center gap-2">Send Message <ArrowRight size={16} /></span>
                   )}
                 </Button>
               </form>

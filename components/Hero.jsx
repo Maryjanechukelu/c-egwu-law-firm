@@ -1,10 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 
-// Practice areas for the sliding marquee
 const PRACTICE_AREAS = [
   "Corporate & Commercial Law",
   "Dispute Resolution",
@@ -19,83 +17,86 @@ const PRACTICE_AREAS = [
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative h-screen min-h-[800px] flex flex-col items-center justify-center overflow-hidden bg-slate-950">
-      
+    <section id="home" className="relative h-[80vh] min-h-[600px] flex flex-col justify-center overflow-hidden bg-slate-950">
+
       {/* --- Background Layer --- */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/home.png"
           alt="Law Firm Office"
           fill
-          className="object-cover opacity-60" 
+          className="object-cover"
           priority
-          quality={90}
+          quality={75}
         />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/50 to-slate-900/90"></div>
+        {/* Heavier Dark Overlay for better text contrast & moody premium feel */}
+        <div className="absolute inset-0 bg-slate-950/80"></div>
+        {/* Subtle gradient from bottom to blend with marquee */}
+        <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-transparent"></div>
       </div>
 
       {/* --- Main Content --- */}
-      <div className="container relative z-20 mx-auto px-4 md:px-8 text-center max-w-5xl mt-[-50px]">
-        
-        {/* Animated Badge */}
-        <div className="animate-fade-in-up opacity-0 [animation-delay:200ms]">
-          <Badge variant="outline" className="mb-6 px-6 py-2 text-sm uppercase tracking-widest border-white/20 text-slate-200 backdrop-blur-sm">
-            Smart Law. Real Solutions.
-          </Badge>
-        </div>
+      <div className="container relative z-20 mx-auto px-4 md:px-8 pt-12 md:pt-0">
+        <div className="max-w-4xl">
 
-        {/* Hero Heading */}
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-8 leading-tight animate-fade-in-up opacity-0 [animation-delay:400ms]">
-          Precision. Commercial Awareness.
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
-            Unwavering Confidence.
-          </span>
-        </h1>
+          {/* Top Label (Replaces the rounded Badge for a sharper look) */}
+          <div className="flex items-center gap-4 mb-8 animate-fade-in-up opacity-0 [animation-delay:200ms]">
+            <div className="h-0.5 w-12 bg-amber-600"></div>
+            <span className="text-amber-500 font-bold tracking-[0.2em] text-xs md:text-sm uppercase">
+              Smart Law. Real Solutions.
+            </span>
+          </div>
 
-        {/* Hero Description */}
-        <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up opacity-0 [animation-delay:600ms]">
-          A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients when stakes are high.
-        </p>
+          {/* Hero Heading - Serif & Statuesque */}
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-white mb-8 leading-[1.1] animate-fade-in-up opacity-0 [animation-delay:400ms]">
+            Precision. <br />
+            Commercial Awareness. <br />
+            <span className="text-amber-500">Unwavering Confidence.</span>
+          </h1>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up opacity-0 [animation-delay:800ms]">
-          <Link href="/practice-areas">
-            <Button size="lg" className="h-14 px-8 text-lg bg-white text-slate-900 hover:bg-slate-200 transition-all cursor-pointer">
-              Explore Our Practice
-            </Button>
-          </Link>
-          <Link href="#contact">
-            <Button variant="outline" size="lg" className="h-14 px-8 text-lg border-white/30 text-white hover:bg-white/10 backdrop-blur-sm cursor-pointer">
-              Contact Us
-            </Button>
-          </Link>
+          {/* Hero Description with vertical border line */}
+          <div className="border-l border-slate-700 pl-6 ml-1 md:ml-2 animate-fade-in-up opacity-0 [animation-delay:600ms]">
+            <p className="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed font-light">
+              A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients when stakes are high.
+            </p>
+          </div>
+
+          {/* CTA Buttons - Sharp corners (rounded-none) */}
+          <div className="flex flex-col sm:flex-row gap-6 mt-10 animate-fade-in-up opacity-0 [animation-delay:800ms]">
+            <Link href="/practice-areas">
+              <Button size="lg" className="w-full sm:w-auto h-16 px-10 text-lg bg-amber-600 text-white hover:bg-amber-700 transition-all rounded-none uppercase tracking-widest font-semibold">
+                Explore Practice Areas
+              </Button>
+            </Link>
+            <Link href="#contact">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg border-slate-600 text-amber-500 hover:bg-white hover:text-slate-950 transition-all rounded-none uppercase tracking-widest font-semibold backdrop-blur-sm">
+                Contact Firm
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* --- Sliding Infinite Marquee --- */}
-      <div className="absolute bottom-0 left-0 w-full z-20 border-t border-white/10 bg-slate-900/60 backdrop-blur-md py-6 overflow-hidden flex">
-        {/* We use two identical sets of the list to create the illusion of infinite scrolling.
-           The 'group' class allows us to pause the animation on hover.
-        */}
+      <div className="absolute bottom-0 left-0 w-full z-20 border-t border-slate-800 bg-slate-950/90 backdrop-blur-md py-6 overflow-hidden flex">
+        {/* Set 1 */}
         <div className="flex animate-infinite-scroll whitespace-nowrap group hover:[animation-play-state:paused]">
           {[...PRACTICE_AREAS, ...PRACTICE_AREAS].map((area, index) => (
-            <div key={index} className="flex items-center mx-8">
-              <span className="w-2 h-2 rounded-full bg-blue-400 mr-4"></span>
-              <span className="text-lg font-medium text-slate-200 tracking-wide uppercase">
+            <div key={index} className="flex items-center mx-8 md:mx-12">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-600 mr-4"></span> {/* Diamond Bullet */}
+              <span className="text-xs md:text-sm font-bold text-slate-400 tracking-[0.15em] uppercase hover:text-white transition-colors cursor-default">
                 {area}
               </span>
             </div>
           ))}
         </div>
-        
-        {/* Duplicate container for seamless loop */}
+
+        {/* Set 2 (Duplicate for loop) */}
         <div className="flex animate-infinite-scroll whitespace-nowrap group hover:[animation-play-state:paused]" aria-hidden="true">
           {[...PRACTICE_AREAS, ...PRACTICE_AREAS].map((area, index) => (
-            <div key={`dup-${index}`} className="flex items-center mx-8">
-              <span className="w-2 h-2 rounded-full bg-blue-400 mr-4"></span>
-              <span className="text-lg font-medium text-slate-200 tracking-wide uppercase">
+            <div key={`dup-${index}`} className="flex items-center mx-8 md:mx-12">
+              <span className="w-1.5 h-1.5 rotate-45 bg-amber-600 mr-4"></span>
+              <span className="text-xs md:text-sm font-bold text-slate-400 tracking-[0.15em] uppercase hover:text-white transition-colors cursor-default">
                 {area}
               </span>
             </div>

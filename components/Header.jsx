@@ -11,7 +11,7 @@ import { BookConsultationModal } from "@/components/BookConsultationModal";
 const NavLink = ({ to, children }) => (
   <Link
     href={to === "home" ? "/" : `/${to}`}
-    className="text-sm font-medium transition-colors hover:text-primary"
+    className="text-sm font-medium transition-colors hover:text-amber-700"
   >
     {children}
   </Link>
@@ -22,7 +22,7 @@ const MobileNavLink = ({ to, children, onClose }) => (
   <Link
     href={to === "home" ? "/" : `/${to}`}
     onClick={onClose}
-    className="text-lg font-medium py-3 border-b border-border/50 transition-colors hover:text-primary block"
+    className="text-lg font-medium py-3 border-b border-border/50 transition-colors hover:text-amber-700 block"
   >
     {children}
   </Link>
@@ -69,7 +69,7 @@ export const Header = () => {
             <NavLink to="practice-areas">Practice Areas</NavLink>
             <NavLink to="team">Team</NavLink>
             <NavLink to="articles">Articles</NavLink>
-            <Button onClick={() => setIsModalOpen(true)}>
+            <Button className="bg-amber-600 text-white hover:bg-amber-700 rounded-none" onClick={() => setIsModalOpen(true)}>
               Book Consultation
             </Button>
           </nav>
@@ -143,7 +143,7 @@ export const Header = () => {
           {/* Drawer Footer Action */}
           <div className="mt-auto pt-8">
             <Button
-              className="w-full"
+              className="w-full bg-amber-600 text-white hover:bg-amber-700 rounded-none"
               onClick={() => {
                 setIsMenuOpen(false);
                 setIsModalOpen(true);

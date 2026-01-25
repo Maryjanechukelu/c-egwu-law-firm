@@ -55,8 +55,8 @@ export function ScrollNavigation() {
         p-3 rounded-full shadow-lg transition-all duration-300
         group hover:scale-110
         ${scrollDirection === "top"
-          ? "bg-primary hover:bg-primary-dark"
-          : "bg-primary hover:bg-primary-dark"}
+          ? "bg-amber-600 hover:bg-amber-800"
+          : "bg-amber-600 hover:bg-amber-800"}
       `}
       aria-label={scrollDirection === "top" ? "Scroll to top" : "Scroll to bottom"}
     >
@@ -76,7 +76,7 @@ export function ScrollNavigation() {
       </div>
 
       {/* Tooltip */}
-      <div className="absolute left-full top-1/2 -translate-y-1/2 mr-3 px-2 py-1 bg-primary text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+      <div className="absolute left-full top-1/2 -translate-y-1/2 mr-3 px-2 py-1 bg-amber-600 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
         {scrollDirection === "top" ? "Go to top" : "Go to bottom"}
       </div>
     </button>

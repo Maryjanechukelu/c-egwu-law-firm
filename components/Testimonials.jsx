@@ -1,23 +1,17 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { testimonials } from '@/lib/data/testimonials';
 
 export const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-    // Auto-play functionality
     useEffect(() => {
         if (!isAutoPlaying) return;
-
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-        }, 5000);
-
+        }, 6000); // Slower, more elegant timing
         return () => clearInterval(interval);
     }, [isAutoPlaying]);
 
@@ -31,182 +25,70 @@ export const Testimonials = () => {
         setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     };
 
-    const goToSlide = (index) => {
-        setIsAutoPlaying(false);
-        setCurrentIndex(index);
-    };
-
-    // Get testimonials to display (current and next 2 for desktop view)
-    const getVisibleTestimonials = () => {
-        const visible = [];
-        for (let i = 0; i < 3; i++) {
-            visible.push(testimonials[(currentIndex + i) % testimonials.length]);
-        }
-        return visible;
-    };
-
-    const visibleTestimonials = getVisibleTestimonials();
+    const currentTestimonial = testimonials[currentIndex];
 
     return (
-        <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-primary/5 overflow-hidden">
-            <div className="container mx-auto px-4 md:px-8">
-                <div className="text-center mb-16">
-                    <Badge className="mb-4">Client Testimonials</Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                        Trusted by Leading Businesses and Individuals
-                    </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Don't just take our word for it. Here's what our clients say about working with us.
-                    </p>
-                </div>
+        <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
+            {/* Decorative Background Element */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
 
-                {/* Desktop View - 3 Cards */}
-                <div className="hidden md:block relative">
-                    <div className="grid md:grid-cols-3 gap-8 mb-12">
-                        {visibleTestimonials.map((testimonial, idx) => (
-                            <Card
-                                key={`${testimonial.id}-${idx}`}
-                                className={`p-8 transition-all duration-500 ${idx === 0
-                                    ? 'scale-105 shadow-2xl border-2 border-primary/20'
-                                    : 'opacity-75 hover:opacity-100'
-                                    }`}
-                            >
-                                <div className="flex items-start gap-4 mb-6">
-                                    <Quote className="text-primary shrink-0" size={32} />
-                                    <div className="flex gap-1">
-                                        {[...Array(testimonial.rating)].map((_, i) => (
-                                            <Star key={i} className="fill-amber-400 text-amber-400" size={16} />
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-4">
-                                    "{testimonial.content}"
-                                </p>
-
-                                <div className="flex items-center gap-4 pt-6 border-t">
-                                    <img
-                                        src={testimonial.image}
-                                        alt={testimonial.name}
-                                        className="w-12 h-12 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h4 className="font-semibold">{testimonial.name}</h4>
-                                        <p className="text-sm text-muted-foreground">
-                                            {testimonial.role}, {testimonial.company}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <Badge className="mt-4 bg-primary/10 text-primary hover:bg-primary/20">
-                                    {testimonial.category}
-                                </Badge>
-                            </Card>
-                        ))}
+            <div className="container mx-auto px-4 md:px-8 relative z-10">
+                <div className="max-w-4xl mx-auto">
+                    <div className="mb-12 flex justify-center">
+                        <Quote size={64} className="text-amber-600/40 rotate-180" />
                     </div>
-                </div>
 
-                {/* Mobile View - Single Card */}
-                <div className="md:hidden relative">
-                    <Card className="p-8 mb-8">
-                        <div className="flex items-start gap-4 mb-6">
-                            <Quote className="text-primary shrink-0" size={32} />
-                            <div className="flex gap-1">
-                                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                                    <Star key={i} className="fill-amber-400 text-amber-400" size={16} />
-                                ))}
+                    <div className="min-h-[300px] flex flex-col justify-center text-center">
+                        <h3 className="text-2xl md:text-4xl font-serif leading-relaxed mb-10 text-slate-100">
+                            "{currentTestimonial.content}"
+                        </h3>
+
+                        <div className="flex flex-col items-center">
+                            <div className="w-16 h-16 relative mb-4">
+                                <img
+                                    src={currentTestimonial.image}
+                                    alt={currentTestimonial.name}
+                                    className="w-full h-full object-cover rounded-full border-2 border-slate-700"
+                                />
                             </div>
-                        </div>
-
-                        <p className="text-muted-foreground mb-6 leading-relaxed">
-                            "{testimonials[currentIndex].content}"
-                        </p>
-
-                        <div className="flex items-center gap-4 pt-6 border-t">
-                            <img
-                                src={testimonials[currentIndex].image}
-                                alt={testimonials[currentIndex].name}
-                                className="w-12 h-12 rounded-full object-cover"
-                            />
-                            <div>
-                                <h4 className="font-semibold">{testimonials[currentIndex].name}</h4>
-                                <p className="text-sm text-muted-foreground">
-                                    {testimonials[currentIndex].role}, {testimonials[currentIndex].company}
+                            <div className="text-center">
+                                <h4 className="text-lg font-bold text-white">{currentTestimonial.name}</h4>
+                                <p className="text-amber-500 text-sm tracking-wide uppercase mt-1">
+                                    {currentTestimonial.role}, {currentTestimonial.company}
                                 </p>
                             </div>
                         </div>
+                    </div>
 
-                        <Badge className="mt-4 bg-primary/10 text-primary hover:bg-primary/20">
-                            {testimonials[currentIndex].category}
-                        </Badge>
-                    </Card>
-                </div>
+                    {/* Minimalist Navigation */}
+                    <div className="flex items-center justify-center gap-8 mt-16">
+                        <button
+                            onClick={goToPrevious}
+                            className="p-2 text-slate-500 hover:text-white transition-colors"
+                        >
+                            <ChevronLeft size={24} />
+                        </button>
 
-                {/* Navigation Controls */}
-                <div className="flex items-center justify-center mt-6">
-                    {/* Desktop Previous */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={goToPrevious}
-                        className="hidden md:flex rounded-full h-10 w-10"
-                        aria-label="Previous slide"
-                    >
-                        <ChevronLeft size={20} />
-                    </Button>
-
-                    {/* Dots Indicator */}
-                    <div className="flex items-center justify-center gap-2 md:gap-3 mx-4">
-                        {testimonials.map((_, idx) => {
-                            const isActive = idx === currentIndex
-
-                            return (
+                        <div className="flex gap-3">
+                            {testimonials.map((_, idx) => (
                                 <button
                                     key={idx}
-                                    onClick={() => goToSlide(idx)}
-                                    aria-label={`Go to testimonial ${idx + 1}`}
-                                    className={`
-                                                rounded-full
-                                                transition-all
-                                                touch-manipulation
-                        ${isActive
-                                            ? 'bg-primary w-2 h-2 md:w-8 md:h-2'
-                                            : 'bg-primary/40 w-1.5 h-1.5 md:w-2 md:h-2 hover:bg-primary/60'}
-                    `}
+                                    onClick={() => {
+                                        setIsAutoPlaying(false);
+                                        setCurrentIndex(idx);
+                                    }}
+                                    className={`h-1 transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-amber-600' : 'w-2 bg-slate-700 hover:bg-slate-600'
+                                        }`}
                                 />
-                            )
-                        })}
-                    </div>
+                            ))}
+                        </div>
 
-                    {/* Desktop Next */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={goToNext}
-                        className="hidden md:flex rounded-full h-10 w-10"
-                        aria-label="Next slide"
-                    >
-                        <ChevronRight size={20} />
-                    </Button>
-                </div>
-
-                {/* Stats Section */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-12 border-t">
-                    <div className="text-center">
-                        <div className="text-4xl font-bold text-primary mb-2">50+</div>
-                        <p className="text-muted-foreground">Happy Clients</p>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-4xl font-bold text-primary mb-2">100+</div>
-                        <p className="text-muted-foreground">Cases Handled</p>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-4xl font-bold text-primary mb-2">95%</div>
-                        <p className="text-muted-foreground">Success Rate</p>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-4xl font-bold text-primary mb-2">5+</div>
-                        <p className="text-muted-foreground">Years Experience</p>
+                        <button
+                            onClick={goToNext}
+                            className="p-2 text-slate-500 hover:text-white transition-colors"
+                        >
+                            <ChevronRight size={24} />
+                        </button>
                     </div>
                 </div>
             </div>

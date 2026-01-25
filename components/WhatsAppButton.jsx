@@ -186,7 +186,7 @@ export const WhatsAppButton = () => {
                                 onChange={(e) => setMessage(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                                 placeholder="Write a message..."
-                                className="flex-1 bg-transparent px-3 py-1 text-sm outline-none"
+                                className="flex-1 bg-transparent px-3 py-1 text-sm outline-none border-none"
                             />
                             <button
                                 onClick={() => handleSendMessage()}

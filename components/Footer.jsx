@@ -1,38 +1,75 @@
 import React from 'react';
-import { Scale } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
+import { Linkedin, Twitter, Instagram } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-950 text-slate-500 py-12 border-t border-slate-900">
-      <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter text-primary">
-          <Link href="/" className="flex items-center md:gap-3">
-            {/* Small logo - responsive sizing */}
-            <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
-              <Image
-                alt="Logo"
-                src="/logo-icon.png"
-                fill
-                className="object-contain"
-              />
-            </div>
+    <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-900 text-sm">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
 
-            {/* Large logo - responsive sizing */}
-            <div className="relative w-32 h-6 md:w-40 md:h-8 lg:w-48 lg:h-10">
-              <Image
-                alt="Logo"
-                src="/logo1.png"
-                fill
-                className="object-contain"
-              />
+          {/* Brand Column */}
+          <div className="md:col-span-1">
+            <Link href="/" className="block mb-6">
+              <div className="relative w-48 h-12 opacity-90 hover:opacity-100 transition-opacity">
+                <Image
+                  alt="Logo"
+                  src="/logo1.png"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+            </Link>
+            <p className="leading-relaxed mb-6">
+              Delivering precise, business-minded legal solutions for local and international clients when stakes are high.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
+              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Twitter size={18} /></a>
+              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Instagram size={18} /></a>
             </div>
-          </Link>
+          </div>
+
+          {/* Links Column */}
+          <div>
+            <h4 className="text-white font-bold uppercase tracking-widest mb-6">Firm</h4>
+            <ul className="space-y-4">
+              <li><Link href="/about" className="hover:text-amber-500 transition-colors">About Us</Link></li>
+              <li><Link href="/team" className="hover:text-amber-500 transition-colors">Our Team</Link></li>
+              <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Careers</Link></li>
+              <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Practice Areas Column */}
+          <div>
+            <h4 className="text-white font-bold uppercase tracking-widest mb-6">Practice</h4>
+            <ul className="space-y-4">
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Corporate Law</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Dispute Resolution</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Intellectual Property</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Real Estate</Link></li>
+            </ul>
+          </div>
+
+          {/* Newsletter / Contact Column */}
+          <div>
+            <h4 className="text-white font-bold uppercase tracking-widest mb-6">Newsletter</h4>
+            <p className="mb-4">Subscribe for legal updates and firm news.</p>
+            <div className="flex">
+              <input type="email" placeholder="Email Address" className="bg-slate-900 border-none outline-none px-4 py-2 w-full text-white placeholder-slate-600" />
+              <button className="bg-amber-600 text-white px-4 hover:bg-amber-700 transition-colors">Join</button>
+            </div>
+          </div>
         </div>
-        <div className="text-sm text-center md:text-right">
+
+        <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} C. Egwu Law Firm. All rights reserved.</p>
-          <p className="mt-1">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>

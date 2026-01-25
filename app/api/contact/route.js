@@ -1,146 +1,131 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-
 export async function POST(request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const resend = new Resend(process.env.RESEND_API_KEY); 
+  try {
+    const body = await request.json();
+    const { firstName, lastName, email, practiceArea, message } = body;
 
-    try {
-        const body = await request.json();
-        const { firstName, lastName, email, practiceArea, message } = body;
-
-        // Validation (same as above)
-        if (!firstName || !lastName || !email || !message) {
-            return NextResponse.json(
-                { error: 'Missing required fields' },
-                { status: 400 }
-            );
-        }
-
-        // Send to your firm
-        await resend.emails.send({
-            from: 'C. Egwu Law Firm <onboarding@resend.dev>',
-            to: 'maryjanechukelu@gmail.com',
-            subject: `New Contact Form Submission - ${practiceArea}`,
-            html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #1e293b; border-bottom: 3px solid #3b82f6; padding-bottom: 10px;">
-            New Contact Form Submission
-          </h2>
-          
-          <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #475569; margin-top: 0;">Contact Information</h3>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Name:</td>
-                <td style="padding: 8px 0;">${firstName} ${lastName}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Email:</td>
-                <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #3b82f6;">${email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Practice Area:</td>
-                <td style="padding: 8px 0;">${practiceArea}</td>
-              </tr>
-            </table>
-          </div>
-          
-          <div style="margin: 20px 0;">
-            <h3 style="color: #475569;">Message</h3>
-            <div style="background-color: #ffffff; padding: 15px; border-left: 4px solid #3b82f6; border-radius: 4px;">
-              ${message.replace(/\n/g, '<br>')}
-            </div>
-          </div>
-          
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 12px;">
-            <p>This email was sent from the contact form on your website.</p>
-            <p>Received: ${new Date().toLocaleString('en-US', {
-                dateStyle: 'full',
-                timeStyle: 'short',
-                timeZone: 'Africa/Lagos'
-            })}</p>
-          </div>
-        </div>
-      `,
-    });
-
-        // Auto-reply
-        await resend.emails.send({
-            from: 'C. Egwu Law Firm <onboarding@resend.dev>',
-            to: email,
-            subject: 'Thank you for contacting C. Egwu Law Firm',
-            html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background-color: #1e293b; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
-            <h1 style="margin: 0; font-size: 28px;">C. Egwu Law Firm</h1>
-            <p style="margin: 10px 0 0 0; opacity: 0.9;">Excellence in Legal Practice</p>
-          </div>
-          
-          <div style="background-color: #ffffff; padding: 30px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 8px 8px;">
-            <h2 style="color: #1e293b; margin-top: 0;">Thank You for Reaching Out</h2>
-            
-            <p style="color: #475569; line-height: 1.6;">
-              Dear ${firstName},
-            </p>
-            
-            <p style="color: #475569; line-height: 1.6;">
-              We have received your inquiry regarding <strong>${practiceArea}</strong>. 
-              Our team will review your message and respond within 24-48 business hours.
-            </p>
-            
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 25px 0;">
-              <h3 style="color: #475569; margin-top: 0; font-size: 16px;">Your Message:</h3>
-              <p style="color: #64748b; margin: 0; font-style: italic;">
-                "${message.substring(0, 200)}${message.length > 200 ? '...' : ''}"
-              </p>
-            </div>
-            
-            <p style="color: #475569; line-height: 1.6;">
-              In the meantime, if you have any urgent matters, please don't hesitate to contact us directly:
-            </p>
-            
-            <div style="background-color: #eff6ff; padding: 15px; border-radius: 8px; margin: 20px 0;">
-              <p style="margin: 5px 0; color: #1e40af;">
-                <strong>Email:</strong> <a href="mailto:info@cegwulawfirm.com" style="color: #3b82f6;">info@cegwulawfirm.com</a>
-              </p>
-              <p style="margin: 5px 0; color: #1e40af;">
-                <strong>Location:</strong> Lagos Free Trade Zone, Nigeria
-              </p>
-            </div>
-            
-            <p style="color: #475569; line-height: 1.6;">
-              We look forward to assisting you with your legal needs.
-            </p>
-            
-            <p style="color: #475569; line-height: 1.6;">
-              Best regards,<br>
-              <strong>The C. Egwu Law Firm Team</strong>
-            </p>
-          </div>
-          
-          <div style="text-align: center; padding: 20px; color: #64748b; font-size: 12px;">
-            <p style="margin: 5px 0;">
-              © ${new Date().getFullYear()} C. Egwu Law Firm. All rights reserved.
-            </p>
-            <p style="margin: 5px 0;">
-              This is an automated message. Please do not reply directly to this email.
-            </p>
-          </div>
-        </div>
-      `,
-    });
-
-        return NextResponse.json(
-            { success: true, message: 'Message sent successfully' },
-            { status: 200 }
-        );
-    } catch (error) {
-        console.error('Contact form error:', error);
-        return NextResponse.json(
-            { error: 'Failed to send message. Please try again later.' },
-            { status: 500 }
-        );
+    // Validation
+    if (!firstName || !lastName || !email || !message) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
     }
+
+    const currentDate = new Date().toLocaleString('en-US', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+      timeZone: 'Africa/Lagos'
+    });
+
+    // ==========================================
+    // EMAIL 1: INTERNAL NOTIFICATION (To Firm)
+    // ==========================================
+    await resend.emails.send({
+      from: 'C. Egwu Law Firm <onboarding@resend.dev>',
+      to: 'maryjanechukelu@gmail.com', // Change to your firm's email in production
+      subject: `[New Lead] ${practiceArea} - ${firstName} ${lastName}`,
+      html: `
+            <!DOCTYPE html>
+            <html>
+            <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f1f5f9;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0;">
+                    <div style="background-color: #020617; padding: 20px; border-bottom: 4px solid #d97706;">
+                        <h2 style="color: #ffffff; margin: 0; font-family: 'Georgia', serif; letter-spacing: 1px;">New Client Inquiry</h2>
+                    </div>
+
+                    <div style="padding: 30px;">
+                        <div style="margin-bottom: 25px;">
+                            <p style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold;">Practice Area</p>
+                            <h3 style="color: #0f172a; margin: 0; font-size: 18px;">${practiceArea}</h3>
+                        </div>
+
+                        <div style="background-color: #f8fafc; padding: 20px; border-left: 4px solid #94a3b8; margin-bottom: 25px;">
+                            <p style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold;">Client Details</p>
+                            <p style="margin: 5px 0; color: #334155;"><strong>Name:</strong> ${firstName} ${lastName}</p>
+                            <p style="margin: 5px 0; color: #334155;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #d97706; text-decoration: none;">${email}</a></p>
+                        </div>
+
+                        <div>
+                            <p style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;">Message</p>
+                            <div style="color: #334155; line-height: 1.6; white-space: pre-wrap;">${message}</div>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f1f5f9; padding: 15px 30px; border-top: 1px solid #e2e8f0;">
+                        <p style="color: #94a3b8; font-size: 12px; margin: 0;">Received: ${currentDate}</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            `,
+    });
+
+    // ==========================================
+    // EMAIL 2: AUTO-REPLY (To Client)
+    // ==========================================
+    await resend.emails.send({
+      from: 'C. Egwu Law Firm <onboarding@resend.dev>',
+      to: email,
+      subject: 'We have received your inquiry - C. Egwu Law Firm',
+      html: `
+            <!DOCTYPE html>
+            <html>
+            <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f8fafc;">
+                <div style="max-width: 600px; margin: 40px auto; background-color: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    
+                    <div style="background-color: #020617; padding: 40px 30px; text-align: center;">
+                        <h1 style="color: #ffffff; margin: 0; font-family: 'Georgia', serif; font-size: 24px; letter-spacing: 1px;">C. EGWU LAW FIRM</h1>
+                        <p style="color: #d97706; margin: 10px 0 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Precision. Awareness. Confidence.</p>
+                    </div>
+
+                    <div style="padding: 40px 30px;">
+                        <p style="color: #334155; font-size: 16px; margin-bottom: 20px;">Dear ${firstName},</p>
+                        
+                        <p style="color: #475569; line-height: 1.6; margin-bottom: 20px;">
+                            Thank you for contacting C. Egwu Law Firm regarding <strong>${practiceArea}</strong>. 
+                        </p>
+                        
+                        <p style="color: #475569; line-height: 1.6; margin-bottom: 30px;">
+                            We acknowledge receipt of your inquiry. Our team is currently reviewing your message to determine how we can best assist you with your legal objectives. You can expect a response from one of our attorneys within <strong>24 business hours</strong>.
+                        </p>
+
+                        <div style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 20px 0; margin: 30px 0; text-align: center;">
+                            <p style="color: #0f172a; font-family: 'Georgia', serif; font-style: italic; margin: 0; font-size: 16px;">
+                                "We don't just interpret the law; we use it to pave the way for your business goals."
+                            </p>
+                        </div>
+
+                        <div style="background-color: #f8fafc; padding: 20px; border-radius: 4px;">
+                            <p style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; font-weight: bold;">Contact Details</p>
+                            <p style="margin: 5px 0; color: #334155; font-size: 14px;">Lagos Free Trade Zone, Nigeria</p>
+                            <p style="margin: 5px 0; color: #334155; font-size: 14px;">info@cegwulawfirm.com</p>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #020617; padding: 20px; text-align: center;">
+                        <p style="color: #475569; font-size: 12px; margin: 0;">&copy; ${new Date().getFullYear()} C. Egwu Law Firm. All rights reserved.</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            `,
+    });
+
+    return NextResponse.json(
+      { success: true, message: 'Message sent successfully' },
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error('Contact form error:', error);
+    return NextResponse.json(
+      { error: 'Failed to send message. Please try again later.' },
+      { status: 500 }
+    );
+  }
 }
