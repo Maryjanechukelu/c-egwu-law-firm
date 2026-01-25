@@ -23,7 +23,7 @@ export const Header = () => {
     <Link
       href={to === 'home' ? '/' : `/${to}`}
       onClick={() => setIsMenuOpen(false)}
-      className="text-lg font-medium py-2 transition-colors hover:text-primary"
+      className="text-lg font-medium py-3 border-b border-border/50 transition-colors hover:text-primary block"
     >
       {children}
     </Link>
@@ -31,11 +31,11 @@ export const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter text-primary">
             <Link href="/" className="flex items-center md:gap-3">
-              {/* Small logo - responsive sizing */}
+              {/* Small logo */}
               <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
                 <Image
                   alt="Logo"
@@ -45,7 +45,7 @@ export const Header = () => {
                 />
               </div>
 
-              {/* Large logo - responsive sizing */}
+              {/* Large logo */}
               <div className="relative w-32 h-6 md:w-40 md:h-8 lg:w-48 lg:h-10">
                 <Image
                   alt="Logo"
@@ -69,23 +69,62 @@ export const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Trigger (Only shows Menu icon now) */}
           <button
             className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen(true)}
           >
-            {isMenuOpen ? <X /> : <Menu />}
+            <Menu className="h-6 w-6" />
           </button>
         </div>
+      </header>
 
-        {/* Mobile Nav */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-background border-b shadow-lg p-4 flex flex-col gap-4">
+      {/* --- Mobile Menu Overlay & Drawer --- */}
+      
+      {/* 1. Dark Overlay (Backdrop) */}
+      <div 
+        className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* 2. Sliding Drawer */}
+      <div 
+        className={`fixed inset-y-0 left-0 z-50 w-[80%] max-w-[300px] bg-background shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full p-6">
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="relative w-28 h-8">
+               <Image
+                  alt="Logo"
+                  src="/logo1.png"
+                  fill
+                  className="object-contain"
+                />
+            </div>
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 hover:bg-muted rounded-full transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Drawer Links */}
+          <nav className="flex flex-col gap-2">
             <MobileNavLink to="home">Home</MobileNavLink>
             <MobileNavLink to="about">About Us</MobileNavLink>
             <MobileNavLink to="practice-areas">Practice Areas</MobileNavLink>
             <MobileNavLink to="team">Team</MobileNavLink>
             <MobileNavLink to="articles">Articles</MobileNavLink>
+          </nav>
+
+          {/* Drawer Footer Action */}
+          <div className="mt-auto pt-8">
             <Button
               className="w-full"
               onClick={() => {
@@ -96,10 +135,10 @@ export const Header = () => {
               Book Consultation
             </Button>
           </div>
-        )}
-      </header>
+        </div>
+      </div>
 
-      {/* Modal outside of header */}
+      {/* Modal */}
       <BookConsultationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
