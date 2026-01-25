@@ -1,0 +1,40 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔨 Build Project
+        run: npm run build
+        # This will create an 'out' folder because of output: 'export' in config
+
+      - name: 📂 Sync files to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # The local folder to upload
+          local-dir: ./out/
+          # The remote folder on cPanel (leave as / if the FTP account is mapped to public_html)
+          server-dir: ./
+          # CAREFUL: This deletes old files on the server to keep it clean
+          # Remove this line if you have other files in that folder you want to keep
+          dangerous-clean-slate: true

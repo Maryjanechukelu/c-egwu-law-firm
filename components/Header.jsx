@@ -1,33 +1,38 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
-import { BookConsultationModal } from '@/components/BookConsultationModal';
+import { Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { BookConsultationModal } from "@/components/BookConsultationModal";
+
+// --- Moved OUTSIDE the Header component ---
+
+const NavLink = ({ to, children }) => (
+  <Link
+    href={to === "home" ? "/" : `/${to}`}
+    className="text-sm font-medium transition-colors hover:text-primary"
+  >
+    {children}
+  </Link>
+);
+
+// We add an 'onClose' prop so it can still close the menu
+const MobileNavLink = ({ to, children, onClose }) => (
+  <Link
+    href={to === "home" ? "/" : `/${to}`}
+    onClick={onClose}
+    className="text-lg font-medium py-3 border-b border-border/50 transition-colors hover:text-primary block"
+  >
+    {children}
+  </Link>
+);
+
+// ------------------------------------------
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const NavLink = ({ to, children }) => (
-    <Link
-      href={to === 'home' ? '/' : `/${to}`}
-      className="text-sm font-medium transition-colors hover:text-primary"
-    >
-      {children}
-    </Link>
-  );
-
-  const MobileNavLink = ({ to, children }) => (
-    <Link
-      href={to === 'home' ? '/' : `/${to}`}
-      onClick={() => setIsMenuOpen(false)}
-      className="text-lg font-medium py-3 border-b border-border/50 transition-colors hover:text-primary block"
-    >
-      {children}
-    </Link>
-  );
 
   return (
     <>
@@ -69,28 +74,27 @@ export const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile Menu Trigger (Only shows Menu icon now) */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(true)}
-          >
+          {/* Mobile Menu Trigger */}
+          <button className="md:hidden p-2" onClick={() => setIsMenuOpen(true)}>
             <Menu className="h-6 w-6" />
           </button>
         </div>
       </header>
 
       {/* --- Mobile Menu Overlay & Drawer --- */}
-      
+
       {/* 1. Dark Overlay (Backdrop) */}
-      <div 
+      <div
         className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
-          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
       {/* 2. Sliding Drawer */}
-      <div 
+      <div
         className={`fixed inset-y-0 left-0 z-50 w-[80%] max-w-[300px] bg-background shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -99,14 +103,14 @@ export const Header = () => {
           {/* Drawer Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="relative w-28 h-8">
-               <Image
-                  alt="Logo"
-                  src="/logo1.png"
-                  fill
-                  className="object-contain"
-                />
+              <Image
+                alt="Logo"
+                src="/logo1.png"
+                fill
+                className="object-contain"
+              />
             </div>
-            <button 
+            <button
               onClick={() => setIsMenuOpen(false)}
               className="p-2 hover:bg-muted rounded-full transition-colors"
             >
@@ -116,11 +120,24 @@ export const Header = () => {
 
           {/* Drawer Links */}
           <nav className="flex flex-col gap-2">
-            <MobileNavLink to="home">Home</MobileNavLink>
-            <MobileNavLink to="about">About Us</MobileNavLink>
-            <MobileNavLink to="practice-areas">Practice Areas</MobileNavLink>
-            <MobileNavLink to="team">Team</MobileNavLink>
-            <MobileNavLink to="articles">Articles</MobileNavLink>
+            <MobileNavLink to="home" onClose={() => setIsMenuOpen(false)}>
+              Home
+            </MobileNavLink>
+            <MobileNavLink to="about" onClose={() => setIsMenuOpen(false)}>
+              About Us
+            </MobileNavLink>
+            <MobileNavLink
+              to="practice-areas"
+              onClose={() => setIsMenuOpen(false)}
+            >
+              Practice Areas
+            </MobileNavLink>
+            <MobileNavLink to="team" onClose={() => setIsMenuOpen(false)}>
+              Team
+            </MobileNavLink>
+            <MobileNavLink to="articles" onClose={() => setIsMenuOpen(false)}>
+              Articles
+            </MobileNavLink>
           </nav>
 
           {/* Drawer Footer Action */}
