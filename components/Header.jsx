@@ -64,10 +64,10 @@ export const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink to="home">Home</NavLink>
             <NavLink to="about">About Us</NavLink>
             <NavLink to="practice-areas">Practice Areas</NavLink>
             <NavLink to="team">Team</NavLink>
+            <NavLink to="#contact">Contact</NavLink>
             <NavLink to="articles">Articles</NavLink>
             <Button className="bg-amber-600 text-white hover:bg-amber-700 rounded-none" onClick={() => setIsModalOpen(true)}>
               Book Consultation
@@ -120,9 +120,6 @@ export const Header = () => {
 
           {/* Drawer Links */}
           <nav className="flex flex-col gap-2">
-            <MobileNavLink to="home" onClose={() => setIsMenuOpen(false)}>
-              Home
-            </MobileNavLink>
             <MobileNavLink to="about" onClose={() => setIsMenuOpen(false)}>
               About Us
             </MobileNavLink>
@@ -134,6 +131,9 @@ export const Header = () => {
             </MobileNavLink>
             <MobileNavLink to="team" onClose={() => setIsMenuOpen(false)}>
               Team
+            </MobileNavLink>
+            <MobileNavLink to="#contact" onClose={() => setIsMenuOpen(false)}>
+              Contact
             </MobileNavLink>
             <MobileNavLink to="articles" onClose={() => setIsMenuOpen(false)}>
               Articles
