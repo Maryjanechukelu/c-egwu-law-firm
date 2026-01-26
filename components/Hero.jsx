@@ -17,7 +17,7 @@ const PRACTICE_AREAS = [
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative h-[80vh] min-h-[600px] flex flex-col justify-center overflow-hidden bg-slate-950">
+    <section id="home" className="relative h-screen sm:h-[80vh] sm:min-h-[600px] flex flex-col justify-center overflow-hidden bg-slate-950">
 
       {/* --- Background Layer --- */}
       <div className="absolute inset-0 z-0">
