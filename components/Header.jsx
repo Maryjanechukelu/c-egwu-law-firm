@@ -102,7 +102,7 @@ export const Header = () => {
         <div className="flex flex-col h-full p-6">
           {/* Drawer Header */}
           <div className="flex items-center justify-between mb-8">
-            <Link href="/" className="flex items-center gap-1 md:gap-1">
+            <Link href="/" className="flex items-center gap-1 md:gap-1" onClose={() => setIsMenuOpen(false)}>
               {/* Small logo */}
               <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
                 <Image
