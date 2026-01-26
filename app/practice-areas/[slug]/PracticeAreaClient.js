@@ -113,7 +113,7 @@ export default function PracticeAreaClient({ practiceArea, relatedPractices }) {
                         </p>
                         <Button 
                             variant="outline" 
-                            onClick={() => scrollToSection('contact')}
+                            onClick={() => scrollToSection('#contact')}
                             className="w-full border-white text-amber-500 hover:bg-white hover:text-amber-600 rounded-none uppercase tracking-widest font-bold"
                         >
                             Contact Us

@@ -7,6 +7,20 @@ import { Button } from '@/components/ui/button';
 export default function ArticleClient({ article, metadata, author }) {
   if (!metadata) return null;
 
+   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+  const handleShare = (platform) => {
+    const urls = {
+      twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(metadata.title)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
+    };
+
+    if (urls[platform]) {
+      window.open(urls[platform], '_blank', 'width=600,height=400');
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen">
       {/* Article Header */}
@@ -71,8 +85,9 @@ export default function ArticleClient({ article, metadata, author }) {
          <div className="mt-20 pt-10 border-t border-slate-200 flex justify-between items-center">
             <h4 className="font-serif font-bold text-slate-900">Share this article</h4>
             <div className="flex gap-4">
-                <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-500 hover:text-amber-600"><Twitter size={16}/></Button>
-                <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-500 hover:text-amber-600"><Linkedin size={16}/></Button>
+                <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-500 hover:text-amber-600"onClick={() => handleShare('twitter')}><Twitter size={16}/></Button>
+                <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-500 hover:text-amber-600"onClick={() => handleShare('linkedin')}><Linkedin size={16}/></Button>
+                <Button variant="outline" size="icon" className="rounded-full border-slate-200 text-slate-500 hover:text-amber-600"onClick={() => handleShare('facebook')}><Facebook size={16}/></Button>
             </div>
          </div>
       </article>
