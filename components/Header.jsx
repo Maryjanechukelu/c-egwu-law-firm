@@ -102,14 +102,27 @@ export const Header = () => {
         <div className="flex flex-col h-full p-6">
           {/* Drawer Header */}
           <div className="flex items-center justify-between mb-8">
-            <div className="relative w-28 h-8">
-              <Image
-                alt="Logo"
-                src="/logo1.png"
-                fill
-                className="object-contain"
-              />
-            </div>
+            <Link href="/" className="flex items-center gap-1 md:gap-1">
+              {/* Small logo */}
+              <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
+                <Image
+                  alt="Logo"
+                  src="/logo-icon.png"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              {/* Large logo */}
+              <div className="relative w-32 h-6 md:w-40 md:h-8 lg:w-48 lg:h-10">
+                <Image
+                  alt="Logo"
+                  src="/logo1.png"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
               className="p-2 hover:bg-muted rounded-full transition-colors"
