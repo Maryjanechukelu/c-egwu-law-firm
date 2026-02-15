@@ -48,10 +48,11 @@ export default async function handler(req) {
     // ==========================================
     // EMAIL 1: INTERNAL NOTIFICATION (To Firm)
     // ==========================================
+    const fromEmail =
+      process.env.RESEND_FROM_EMAIL || "inquires@cegwulawfirm.com";
+
     await resend.emails.send({
-      from:
-        process.env.RESEND_FROM_EMAIL ||
-        "C. Egwu Law Firm <onboarding@resend.dev>",
+      from: fromEmail,
       to: process.env.RESEND_NOTIFY_EMAIL || "egwuchidinma6@gmail.com",
       subject: `[New Lead] ${practiceArea} - ${firstName} ${lastName}`,
       html: `
@@ -94,9 +95,7 @@ export default async function handler(req) {
     // EMAIL 2: AUTO-REPLY (To Client)
     // ==========================================
     await resend.emails.send({
-      from:
-        process.env.RESEND_FROM_EMAIL ||
-        "C. Egwu Law Firm <onboarding@resend.dev>",
+      from: fromEmail,
       to: email,
       subject: "We have received your inquiry - C. Egwu Law Firm",
       html: `
@@ -138,9 +137,9 @@ export default async function handler(req) {
 
                     <div style="background-color: #020617; color: #94a3b8; padding: 30px; text-align: center;">
                         <p style="margin: 0 0 10px 0; font-size: 18px; font-family: 'Georgia', serif; color: #ffffff;">C. EGWU LAW FIRM</p>
-                        <p style="margin: 0 0 15px 0; font-size: 12px;">Lagos, Nigeria | Abuja, Nigeria</p>
+                        <p style="margin: 0 0 15px 0; font-size: 12px;">Lagos, Nigeria</p>
                         <p style="margin: 0; font-size: 12px;">
-                            <a href="mailto:inquiries@cegwulawfirm.com" style="color: #d97706; text-decoration: none;">inquiries@cegwulawfirm.com</a> | 
+                            <a href="mailto:inquires@cegwulawfirm.com" style="color: #d97706; text-decoration: none;">inquires@cegwulawfirm.com</a> | 
                             <a href="https://cegwulawfirm.com" style="color: #d97706; text-decoration: none;">www.cegwulawfirm.com</a>
                         </p>
                     </div>
