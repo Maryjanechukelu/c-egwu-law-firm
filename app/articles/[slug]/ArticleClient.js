@@ -56,7 +56,7 @@ export default function ArticleClient({ article, metadata, author }) {
       </div>
 
       {/* Content Column */}
-      <article className="container mx-auto px-4 md:px-8 max-w-3xl py-20">
+      <article className="container mx-auto px-4 md:px-8 max-w-4xl py-20">
          {/* Author Byline */}
          {author && (
             <div className="flex items-center gap-4 mb-12 pb-8 border-b border-slate-100">

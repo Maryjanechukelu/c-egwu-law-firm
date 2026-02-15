@@ -25,9 +25,9 @@ export const Footer = () => {
               Delivering precise, business-minded legal solutions for local and international clients when stakes are high.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
-              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Twitter size={18} /></a>
-              <a href="#" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Instagram size={18} /></a>
+              <a href="https://www.linkedin.com/company/c-egwu-law-firm/" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
+              <a href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Twitter size={18} /></a>
+              <a href="https://www.instagram.com/cegwu_law" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Instagram size={18} /></a>
             </div>
           </div>
 
