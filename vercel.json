@@ -4,10 +4,5 @@
       "memory": 1024,
       "maxDuration": 10
     }
-  },
-  "env": {
-    "RESEND_API_KEY": "@resend_api_key",
-    "RESEND_FROM_EMAIL": "@resend_from_email",
-    "RESEND_NOTIFY_EMAIL": "@resend_notify_email"
   }
 }
