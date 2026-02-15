@@ -3,23 +3,25 @@ RewriteEngine On
 # Disable directory listing
 Options -Indexes
 
-# Set default index files
-DirectoryIndex index.html index.htm
-
 # Redirect HTTP to HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Handle Next.js static export routing
+# Handle directories - look for index.html inside the directory first
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.*)$ $1/index.html [L]
+
+# Handle Next.js static export - rewrite /path to /path.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
-# Fallback to index.html for SPA behavior
+# Fallback to index.html for client-side routing
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+RewriteRule ^ /index.html [L]
 
 # Enable compression
 <IfModule mod_deflate.c>
