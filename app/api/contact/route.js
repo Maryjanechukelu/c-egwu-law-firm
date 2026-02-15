@@ -1,35 +1,37 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
+import { Resend } from "resend";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-    try {
-        const body = await request.json();
-        const { firstName, lastName, email, practiceArea, message } = body;
+  try {
+    const body = await request.json();
+    const { firstName, lastName, email, practiceArea, message } = body;
 
-        // Validation
-        if (!firstName || !lastName || !email || !message) {
-            return NextResponse.json(
-                { error: 'Missing required fields' },
-                { status: 400 }
-            );
-        }
+    // Validation
+    if (!firstName || !lastName || !email || !message) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
 
-        const currentDate = new Date().toLocaleString('en-US', {
-            dateStyle: 'full',
-            timeStyle: 'short',
-            timeZone: 'Africa/Lagos'
-        });
+    const currentDate = new Date().toLocaleString("en-US", {
+      dateStyle: "full",
+      timeStyle: "short",
+      timeZone: "Africa/Lagos",
+    });
 
-        // ==========================================
-        // EMAIL 1: INTERNAL NOTIFICATION (To Firm)
-        // ==========================================
-        await resend.emails.send({
-            from: process.env.RESEND_FROM_EMAIL || 'C. Egwu Law Firm <onboarding@resend.dev>',
-            to: process.env.RESEND_NOTIFY_EMAIL || 'maryjanechukelu@gmail.com',
-            subject: `[New Lead] ${practiceArea} - ${firstName} ${lastName}`,
-            html: `
+    // ==========================================
+    // EMAIL 1: INTERNAL NOTIFICATION (To Firm)
+    // ==========================================
+    await resend.emails.send({
+      from:
+        process.env.RESEND_FROM_EMAIL ||
+        "C. Egwu Law Firm <onboarding@resend.dev>",
+      to: process.env.RESEND_NOTIFY_EMAIL || "maryjanechukelu@gmail.com",
+      subject: `[New Lead] ${practiceArea} - ${firstName} ${lastName}`,
+      html: `
             <!DOCTYPE html>
             <html>
             <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f1f5f9;">
@@ -63,16 +65,18 @@ export async function POST(request) {
             </body>
             </html>
             `,
-        });
+    });
 
-        // ==========================================
-        // EMAIL 2: AUTO-REPLY (To Client)
-        // ==========================================
-        await resend.emails.send({
-            from: process.env.RESEND_FROM_EMAIL || 'C. Egwu Law Firm <onboarding@resend.dev>',
-            to: email,
-            subject: 'We have received your inquiry - C. Egwu Law Firm',
-            html: `
+    // ==========================================
+    // EMAIL 2: AUTO-REPLY (To Client)
+    // ==========================================
+    await resend.emails.send({
+      from:
+        process.env.RESEND_FROM_EMAIL ||
+        "C. Egwu Law Firm <onboarding@resend.dev>",
+      to: email,
+      subject: "We have received your inquiry - C. Egwu Law Firm",
+      html: `
             <!DOCTYPE html>
             <html>
             <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f8fafc;">
@@ -114,18 +118,17 @@ export async function POST(request) {
             </body>
             </html>
             `,
-        });
+    });
 
-        return NextResponse.json(
-            { success: true, message: 'Message sent successfully' },
-            { status: 200 }
-        );
-
-    } catch (error) {
-        console.error('Contact form error:', error);
-        return NextResponse.json(
-            { error: 'Failed to send message. Please try again later.' },
-            { status: 500 }
-        );
-    }
+    return NextResponse.json(
+      { success: true, message: "Message sent successfully" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("Contact form error:", error);
+    return NextResponse.json(
+      { error: "Failed to send message. Please try again later." },
+      { status: 500 },
+    );
+  }
 }
