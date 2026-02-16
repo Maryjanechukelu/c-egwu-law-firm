@@ -129,8 +129,8 @@ export default async function handler(req) {
                         <div style="background-color: #f8fafc; padding: 20px; margin: 30px 0;">
                             <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 16px;">In the Meantime</h3>
                             <p style="color: #475569; line-height: 1.6; margin: 0;">
-                                Feel free to explore our resources on <a href="https://cegwulawfirm.com/articles" style="color: #d97706; text-decoration: none;">our blog</a> 
-                                or schedule a consultation directly via our <a href="https://cegwulawfirm.com" style="color: #d97706; text-decoration: none;">website</a>.
+                                Feel free to explore our resources on <a href="https://cegwulawfirm.com/articles.html" style="color: #d97706; text-decoration: none;">our blog</a> 
+                                or schedule a consultation directly via our <a href="https://cegwulawfirm.com/" style="color: #d97706; text-decoration: none;">website</a>.
                             </p>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ export default async function handler(req) {
                         <p style="margin: 0 0 15px 0; font-size: 12px;">Lagos, Nigeria</p>
                         <p style="margin: 0; font-size: 12px;">
                             <a href="mailto:inquires@cegwulawfirm.com" style="color: #d97706; text-decoration: none;">inquires@cegwulawfirm.com</a> | 
-                            <a href="https://cegwulawfirm.com" style="color: #d97706; text-decoration: none;">www.cegwulawfirm.com</a>
+                            <a href="https://cegwulawfirm.com/" style="color: #d97706; text-decoration: none;">www.cegwulawfirm.com</a>
                         </p>
                     </div>
                 </div>
