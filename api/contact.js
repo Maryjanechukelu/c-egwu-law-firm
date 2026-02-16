@@ -130,7 +130,7 @@ export default async function handler(req) {
                             <h3 style="color: #0f172a; margin: 0 0 10px 0; font-size: 16px;">In the Meantime</h3>
                             <p style="color: #475569; line-height: 1.6; margin: 0;">
                                 Feel free to explore our resources on <a href="https://cegwulawfirm.com/articles.html" style="color: #d97706; text-decoration: none;">our blog</a> 
-                                or schedule a consultation directly via our <a href="https://cegwulawfirm.com/" style="color: #d97706; text-decoration: none;">website</a>.
+                                or schedule a consultation directly via our <a href="https://cegwulawfirm.com" style="color: #d97706; text-decoration: none;">website</a>.
                             </p>
                         </div>
                     </div>
