@@ -41,30 +41,30 @@ export const Header = () => {
           <div className="flex items-center gap-2 font-bold text-xl md:text-2xl tracking-tighter text-primary">
             <Link href="/" className="flex items-center md:gap-3">
               {/* Small logo */}
-              <div className="relative w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
+              <div className="relative w-32 h-16 md:w-40 md:h-20 lg:w-48 lg:h-18">
                 <Image
                   alt="Logo"
-                  src="/logo-icon.png"
+                  src="/logo.png"
                   fill
                   className="object-contain"
                 />
               </div>
 
               {/* Large logo */}
-              <div className="relative w-32 h-6 md:w-40 md:h-8 lg:w-48 lg:h-10">
+              {/* <div className="relative w-32 h-6 md:w-40 md:h-8 lg:w-48 lg:h-10">
                 <Image
                   alt="Logo"
                   src="/logo1.png"
                   fill
                   className="object-contain"
                 />
-              </div>
+              </div> */}
             </Link>
           </div>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink to="about">About Us</NavLink>
+            {/* <NavLink to="about">About Us</NavLink> */}
             <NavLink to="practice-areas">Practice Areas</NavLink>
             <NavLink to="team">Team</NavLink>
             <NavLink to="#contact">Contact</NavLink>
@@ -133,9 +133,9 @@ export const Header = () => {
 
           {/* Drawer Links */}
           <nav className="flex flex-col gap-2">
-            <MobileNavLink to="about" onClose={() => setIsMenuOpen(false)}>
+            {/* <MobileNavLink to="about" onClose={() => setIsMenuOpen(false)}>
               About Us
-            </MobileNavLink>
+            </MobileNavLink> */}
             <MobileNavLink
               to="practice-areas"
               onClose={() => setIsMenuOpen(false)}

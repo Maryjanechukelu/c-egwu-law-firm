@@ -54,7 +54,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
             <div className="bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in-up">
                 
                 {/* Header - Dark & Sharp */}
-                <div className="sticky top-0 bg-slate-950 text-white px-8 py-6 flex items-center justify-between z-10">
+                <div className="sticky top-0 bg-[#3c144c] text-white px-8 py-6 flex items-center justify-between z-10">
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <div className="h-0.5 w-8 bg-amber-600"></div>
@@ -133,11 +133,13 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
                                         onChange={handleChange}
                                         className="w-full pb-2 border-b border-slate-300 focus:border-amber-600 focus:outline-none transition-colors text-slate-900 rounded-none bg-transparent appearance-none"
                                     >
-                                        <option>Corporate Law</option>
-                                        <option>Technology & Media</option>
-                                        <option>Intellectual Property</option>
-                                        <option>Employment Law</option>
-                                        <option>Private Wealth</option>
+                                        <option className="bg-white">Corporate Law</option>
+                                        <option className="bg-white">Technology & Media</option>
+                                        <option className="bg-white">
+                                        Intellectual Property
+                                        </option>
+                                        <option className="bg-white">Employment & Labour Law</option>
+                                        <option className="bg-white">Private Wealth (Family Law, Wills, Tax & Estate Planning)</option>
                                         <option>Other</option>
                                     </select>
                                 </div>
@@ -170,7 +172,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
                                 </Button>
                                 <Button
                                     type="submit"
-                                    className="flex-1 rounded-none bg-slate-900 text-white hover:bg-amber-600 uppercase tracking-widest font-bold h-14 flex items-center justify-center gap-2 group"
+                                    className="flex-1 rounded-none bg-[#3c144c] text-white hover:bg-amber-600 uppercase tracking-widest font-bold h-14 flex items-center justify-center gap-2 group"
                                 >
                                     Continue <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
                                 </Button>
@@ -204,7 +206,7 @@ export const BookConsultationModal = ({ isOpen, onClose }) => {
 
                             <button
                                 onClick={handleCalendlyClick}
-                                className="w-full group relative overflow-hidden bg-slate-900 p-8 text-left transition-all hover:bg-amber-600"
+                                className="w-full group relative overflow-hidden bg-[#3c144c] p-8 text-left transition-all hover:bg-amber-600"
                             >
                                 <div className="relative z-10 flex items-center justify-between">
                                     <div className="flex items-center gap-6">

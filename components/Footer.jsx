@@ -5,7 +5,7 @@ import { Linkedin, Twitter, Instagram } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-900 text-sm">
+    <footer className="bg-[#3c144c] text-slate-400 py-16 border-t border-white text-sm">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
 
@@ -21,13 +21,13 @@ export const Footer = () => {
                 />
               </div>
             </Link>
-            <p className="leading-relaxed mb-6">
+            {/* <p className="leading-relaxed mb-6">
               Delivering precise, business-minded legal solutions for local and international clients when stakes are high.
-            </p>
+            </p> */}
             <div className="flex gap-4">
-              <a href="https://www.linkedin.com/company/c-egwu-law-firm/" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
-              <a href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Twitter size={18} /></a>
-              <a href="https://www.instagram.com/cegwu_law" target="_blank" className="p-2 bg-slate-900 hover:bg-amber-600 hover:text-white transition-colors"><Instagram size={18} /></a>
+              <a href="https://www.linkedin.com/company/c-egwu-law-firm/" target="_blank" className="p-2 bg-white text-amber-600 hover:bg-amber-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
+              <a href="https://x.com/firm_c30532?t=gyUPdp-Q56CLxLdoxO2Q8Q&s=08" target="_blank" className="p-2 bg-white text-amber-600 hover:bg-amber-600 hover:text-white transition-colors"><Twitter size={18} /></a>
+              <a href="https://www.instagram.com/cegwu_law" target="_blank" className="p-2 bg-white text-amber-600 hover:bg-amber-600 hover:text-white transition-colors"><Instagram size={18} /></a>
             </div>
           </div>
 
@@ -35,10 +35,11 @@ export const Footer = () => {
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest mb-6">Firm</h4>
             <ul className="space-y-4">
-              <li><Link href="/about" className="hover:text-amber-500 transition-colors">About Us</Link></li>
+              {/* <li><Link href="/about" className="hover:text-amber-500 transition-colors">About Us</Link></li> */}
               <li><Link href="/team" className="hover:text-amber-500 transition-colors">Our Team</Link></li>
               <li><Link href="/careers" className="hover:text-amber-500 transition-colors">Careers</Link></li>
               <li><Link href="/contact" className="hover:text-amber-500 transition-colors">Contact</Link></li>
+              <li><Link href="/articles" className="hover:text-amber-500 transition-colors">Articles</Link></li>
             </ul>
           </div>
 
@@ -47,9 +48,10 @@ export const Footer = () => {
             <h4 className="text-white font-bold uppercase tracking-widest mb-6">Practice</h4>
             <ul className="space-y-4">
               <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Corporate Law</Link></li>
-              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Dispute Resolution</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Technology & Media Law</Link></li>
               <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Intellectual Property</Link></li>
-              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Real Estate</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Employment & Labour Law</Link></li>
+              <li><Link href="/practice-areas" className="hover:text-amber-500 transition-colors">Private Wealth (Family Law, Wills, Tax & Estate Planning)</Link></li>
             </ul>
           </div>
 
@@ -64,7 +66,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} C. Egwu Law Firm. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

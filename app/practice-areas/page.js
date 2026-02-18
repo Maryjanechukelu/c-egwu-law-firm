@@ -8,7 +8,7 @@ export default function PracticeAreasPage() {
     return (
         <div className="bg-white min-h-screen">
             {/* Hero */}
-            <section className="bg-slate-950 text-white py-24 border-b border-slate-800">
+            <section className="bg-[#3c144c] text-white py-24 border-b border-slate-800">
                 <div className="container mx-auto px-4 md:px-8">
                     <span className="text-amber-500 font-bold tracking-widest text-sm uppercase mb-6 block">Our Expertise</span>
                     <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 max-w-4xl">
@@ -49,13 +49,15 @@ export default function PracticeAreasPage() {
                                         </p>
                                         
                                         {/* Services Mini-List */}
-                                        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-                                            {area.services.slice(0, 3).map((service, idx) => (
-                                                <span key={idx} className="text-sm font-medium text-slate-400 uppercase tracking-wider">
-                                                    • {service}
-                                                </span>
-                                            ))}
-                                        </div>
+                                        {area.services && area.services.length > 0 && (
+                                            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                                                {area.services.slice(0, 3).map((service, idx) => (
+                                                    <span key={idx} className="text-sm font-medium text-slate-400 uppercase tracking-wider">
+                                                        • {service}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Arrow */}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -74,7 +75,7 @@ export default function TeamPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-slate-950 text-white py-20 border-t border-slate-900">
+            <section className="bg-[#3c144c] text-white py-20 border-t border-slate-900">
                 <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-12">
                     <div className="max-w-xl">
                         <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">

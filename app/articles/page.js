@@ -117,7 +117,7 @@ export default function ArticlesPage() {
           ) : (
             <div className="py-20 text-center">
               <p className="text-xl text-slate-400 font-serif italic">
-                No articles found matching "{searchQuery}".
+                No articles found matching &quot;{searchQuery}&quot;.
               </p>
               <button
                 onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
@@ -131,7 +131,7 @@ export default function ArticlesPage() {
       </section>
 
       {/* --- Newsletter Section --- */}
-      <section className="bg-slate-950 text-white py-20 mt-12">
+      {/* <section className="bg-[#3c144c] text-white py-20 mt-12">
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-2xl font-serif font-bold mb-2">Subscribe to our newsletter</h3>
@@ -144,7 +144,7 @@ export default function ArticlesPage() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

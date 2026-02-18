@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
@@ -28,7 +29,7 @@ export const Testimonials = () => {
     const currentTestimonial = testimonials[currentIndex];
 
     return (
-        <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
+        <section className="py-32 bg-[#3c144c] text-white overflow-hidden relative">
             {/* Decorative Background Element */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
 
@@ -40,11 +41,11 @@ export const Testimonials = () => {
 
                     <div className="min-h-[300px] flex flex-col justify-center text-center">
                         <h3 className="text-2xl md:text-4xl font-serif leading-relaxed mb-10 text-slate-100">
-                            "{currentTestimonial.content}"
+                            &quot;{currentTestimonial.content}&quot;
                         </h3>
 
                         <div className="flex flex-col items-center">
-                            <div className="w-16 h-16 relative mb-4">
+                            <div className="w-28 h-28 relative mb-4">
                                 <img
                                     src={currentTestimonial.image}
                                     alt={currentTestimonial.name}
@@ -52,9 +53,9 @@ export const Testimonials = () => {
                                 />
                             </div>
                             <div className="text-center">
-                                <h4 className="text-lg font-bold text-white">{currentTestimonial.name}</h4>
-                                <p className="text-amber-500 text-sm tracking-wide uppercase mt-1">
-                                    {currentTestimonial.role}, {currentTestimonial.company}
+                                {/* <h4 className="text-lg font-bold text-white">{currentTestimonial.name}</h4> */}
+                                <p className="text-amber-500 text-lg tracking-wide uppercase mt-1">
+                                    {currentTestimonial.company}
                                 </p>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ import { Button } from './ui/button';
 const PRACTICE_DATA = [
   {
     id: 1,
-    title: "Corporate & Commercial Law",
+    title: "Corporate Law",
     slug: "corporate-law", // Adjusted to standard slug format
     description: "We support businesses through every stage of their lifecycle, from establishment to expansion. Our team advises on private equity, M&A, restructuring, and corporate governance, ensuring your business foundation is solid, compliant, and scalable in the Nigerian and global market."
   },
@@ -24,21 +24,21 @@ const PRACTICE_DATA = [
     slug: "intellectual-property",
     description: "Protecting creative and commercial assets is at our core. We handle trademark registration, patent filing, copyright disputes, and licensing strategies. We ensure your brand's value is legally recognized and defended against infringement."
   },
+  // {
+  //   id: 4,
+  //   title: "Dispute Resolution",
+  //   slug: "dispute-resolution",
+  //   description: "When conflicts arise, we provide robust representation in commercial litigation, arbitration, and mediation. Our focus is not just on winning cases, but on securing commercially favourable outcomes that minimize business disruption."
+  // },
   {
     id: 4,
-    title: "Dispute Resolution",
-    slug: "dispute-resolution",
-    description: "When conflicts arise, we provide robust representation in commercial litigation, arbitration, and mediation. Our focus is not just on winning cases, but on securing commercially favourable outcomes that minimize business disruption."
-  },
-  {
-    id: 5,
-    title: "Employment & Labour",
+    title: "Employment & Labour Law",
     slug: "employment-labour-law",
     description: "We guide employers through drafting contracts, HR policies, and compliance with Nigerian labour laws. We also handle workplace investigations and dispute avoidance strategies to maintain a healthy and legal workforce environment."
   },
   {
-    id: 6,
-    title: "Private Wealth",
+    id: 5,
+    title: "Private Wealth (Family Law, Wills, Tax & Estate Planning)",
     slug: "private-wealth",
     description: "We provide discreet, high-level support for high-net-worth individuals and families. Our services include estate planning, wills, trusts, and family law matters, ensuring your legacy is preserved according to your precise wishes."
   }
@@ -53,7 +53,7 @@ export const PracticeAreas = () => {
   };
 
   return (
-    <section id="practice-areas" className="py-12 md:py-24 bg-white">
+    <section id="practice-areas" className="py-12 md:py-12 bg-white">
       <div className="container mx-auto px-4 md:px-8">
 
         <div className="grid lg:grid-cols-12 gap-16">
@@ -72,12 +72,12 @@ export const PracticeAreas = () => {
               </h2>
 
               <p className="text-slate-600 text-lg leading-relaxed mb-8">
-                We provide commercially sound legal advisory across various industries including Telecoms, Tech, Banking, and Agriculture. We don't just interpret the law; we use it to pave the way for your business goals.
+                We provide commercially sound legal advisory across various industries. We don&apos;t just interpret the law; we use it to pave the way for your business goals.
               </p>
 
-              <Button className="hidden lg:flex h-14 px-8 bg-slate-900 text-white hover:bg-amber-600 rounded-none uppercase tracking-widest font-semibold items-center gap-2 transition-all">
+              {/* <Button className="hidden lg:flex h-14 px-8 bg-slate-900 text-white hover:bg-amber-600 rounded-none uppercase tracking-widest font-semibold items-center gap-2 transition-all">
                 Download Brochure <ArrowRight size={16} />
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -128,11 +128,11 @@ export const PracticeAreas = () => {
             </div>
 
             {/* Mobile-only CTA */}
-            <div className="mt-12 lg:hidden">
+            {/* <div className="mt-12 lg:hidden">
               <Button className="w-full h-14 bg-slate-900 text-white hover:bg-amber-600 rounded-none uppercase tracking-widest font-semibold flex items-center justify-center gap-2">
                 Download Brochure <ArrowRight size={16} />
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

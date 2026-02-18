@@ -12,12 +12,11 @@ const PRACTICE_AREAS = [
   "Tax Advisory",
   "Employment & Labor",
   "Banking & Finance",
-  "Energy & Natural Resources"
 ];
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative h-screen sm:h-[80vh] sm:min-h-[600px] flex flex-col justify-center overflow-hidden bg-slate-950">
+    <section id="home" className="relative h-screen sm:h-[80vh] sm:min-h-[600px] flex flex-col justify-center overflow-hidden bg-[#430c77]">
 
       {/* --- Background Layer --- */}
       <div className="absolute inset-0 z-0">
@@ -30,9 +29,9 @@ export const Hero = () => {
           quality={75}
         />
         {/* Heavier Dark Overlay for better text contrast & moody premium feel */}
-        <div className="absolute inset-0 bg-slate-950/80"></div>
+        <div className="absolute inset-0 bg-[#3C144CD1]"></div>
         {/* Subtle gradient from bottom to blend with marquee */}
-        <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-[#3C144CAD] via-transparent to-transparent"></div>
       </div>
 
       {/* --- Main Content --- */}
@@ -57,7 +56,7 @@ export const Hero = () => {
           {/* Hero Description with vertical border line */}
           <div className="border-l border-slate-700 pl-4 md:pl-6 ml-1 md:ml-2 animate-fade-in-up opacity-0 [animation-delay:600ms]">
             <p className="text-base md:text-xl text-slate-300 max-w-xl leading-relaxed font-light">
-              A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients when stakes are high.
+              A full-service business law firm committed to delivering precise, business-minded legal solutions for local and international clients.
             </p>
           </div>
 
@@ -78,7 +77,7 @@ export const Hero = () => {
       </div>
 
       {/* --- Sliding Infinite Marquee --- */}
-      <div className="absolute bottom-0 left-0 w-full z-20 border-t border-slate-800 bg-slate-950/90 backdrop-blur-md py-6 overflow-hidden flex">
+      <div className="absolute bottom-0 left-0 w-full z-20 border-t border-slate-800 bg-[#3c144c] backdrop-blur-md py-6 overflow-hidden flex">
         {/* Set 1 */}
         <div className="flex animate-infinite-scroll whitespace-nowrap group hover:[animation-play-state:paused]">
           {[...PRACTICE_AREAS, ...PRACTICE_AREAS].map((area, index) => (
