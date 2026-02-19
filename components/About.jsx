@@ -45,23 +45,23 @@ export const About = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-8 border-t border-slate-200 pt-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-slate-200 pt-8 mt-8">
             <div>
-              <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 mt-12">Our Approach</h3>
+              <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 mt-10">Our Approach</h3>
               <p className="mb-6">
-                Our focus is on legal advice that works in practice—not just in theory. We take the time to 
+                Our focus is on legal advice that works in practice, not just in theory. We take the time to 
                 understand each client&apos;s goals, anticipate risks, and simplify the legal issues so they can make 
                 informed decisions.
               </p>
               <p className="mb-8">
                 Responsiveness is at the heart of our service. Clients choose us because we communicate 
                 clearly, deliver promptly, and maintain the highest standards of confidentiality and 
-                professionalism. We don&apos;t just solve legal problems—we help clients protect their interests and 
+                professionalism. We don&apos;t just solve legal problems, we help clients protect their interests and 
                 plan ahead with confidence.
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 mt-12">Our Commitment</h3>
+              <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 mt-10">Our Commitment</h3>
               <p className="mb-6">
                 Every engagement is handled with diligence, speed, and discretion. Clients rely on us for:
               </p>
@@ -93,7 +93,7 @@ export const About = () => {
               </ul>
               <p className="mb-8">
                 Our mission is simple: support clients with the clarity and legal confidence they need to thrive 
-                in today&apos;s competitive and fast-changing environment.
+                in today&apos;s competitive and fast changing environment.
               </p>
             </div>
             {/* <div>
@@ -101,6 +101,13 @@ export const About = () => {
                 <p className="text-sm text-slate-500">Legal advice that works in practice, not just in theory.</p>
             </div>       */}
           </div>
+      </div>
+      <div className="mt-12">
+        <img 
+          src="/about-us.png" 
+          alt="C. Egwu Law Firm Team" 
+          className="w-full h-auto object-cover"
+        />
       </div>
     </section>
   );

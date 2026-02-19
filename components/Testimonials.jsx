@@ -40,7 +40,7 @@ export const Testimonials = () => {
                     </div>
 
                     <div className="min-h-[300px] flex flex-col justify-center text-center">
-                        <h3 className="text-2xl md:text-4xl font-serif leading-relaxed mb-10 text-slate-100">
+                        <h3 className="text-md md:text-2xl md:text-4xl font-serif leading-relaxed mb-10 text-slate-100">
                             &quot;{currentTestimonial.content}&quot;
                         </h3>
 
@@ -78,7 +78,7 @@ export const Testimonials = () => {
                                         setIsAutoPlaying(false);
                                         setCurrentIndex(idx);
                                     }}
-                                    className={`h-1 transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-amber-600' : 'w-2 bg-slate-700 hover:bg-slate-600'
+                                    className={`h-0.5 md:h-1 transition-all duration-300 ${idx === currentIndex ? 'w-2 md:w-8 bg-amber-600' : 'w-2 bg-slate-700 hover:bg-slate-600'
                                         }`}
                                 />
                             ))}

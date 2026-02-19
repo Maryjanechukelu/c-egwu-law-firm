@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: 'C. Egwu Law Firm | Precision. Awareness. Confidence.',
+  title: 'C. Egwu Law Firm | Precision | Commercial Awareness.',
   description: 'A full-service business law firm delivering precise legal solutions.',
 };
 
