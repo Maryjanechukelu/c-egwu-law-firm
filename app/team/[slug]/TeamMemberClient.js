@@ -127,7 +127,7 @@ export default function TeamMemberClient({ member }) {
                                 <ul className="space-y-4">
                                     {member.work.map((item, idx) => (
                                         <li key={idx} className="flex gap-4 text-slate-600 leading-relaxed">
-                                            <span className="text-amber-600 font-bold flex-shrink-0 mt-1">{idx + 1}.</span>
+                                            <span className="text-amber-600 font-bold shrink-0 mt-1">{idx + 1}.</span>
                                             <span className="font-light">{item}</span>
                                         </li>
                                     ))}
