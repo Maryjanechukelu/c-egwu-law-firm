@@ -15,7 +15,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Handle directories - look for index.html inside the directory first
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_FILENAME}/index.html -f
-RewriteRule ^(.*)$ $1/index.html [L]
+RewriteRule ^(.*?)/?$ $1/index.html [L]
 
 # Handle Next.js static export - rewrite /path to /path.html
 RewriteCond %{REQUEST_FILENAME} !-f

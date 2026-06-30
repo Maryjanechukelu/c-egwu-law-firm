@@ -1,25 +1,29 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Search, X } from 'lucide-react';
-import { articlesMetadata, getCategories } from '@/lib/data/articles';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, Search, X, FileText } from "lucide-react";
+import { articlesMetadata, getCategories } from "@/lib/data/articles";
+import PdfArticleModal from "@/components/PdfArticleModal";
 
 export default function ArticlesPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [modalArticle, setModalArticle] = useState(null);
 
   // Get dynamic categories
-  const allCategories = ['all', ...getCategories()];
+  const allCategories = ["all", ...getCategories()];
 
   // Filter Logic
-  const filteredArticles = articlesMetadata.filter((article) => {
-    const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory;
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesCategory && matchesSearch;
-  });
+  const filteredArticles = articlesMetadata
+    .filter((article) => {
+      const matchesCategory =
+        selectedCategory === "all" || article.category === selectedCategory;
+      const matchesSearch =
+        article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    })
+    .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
   return (
     <div className="bg-white min-h-screen">
@@ -34,7 +38,6 @@ export default function ArticlesPage() {
           </h1>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-
             {/* Category Tabs */}
             <div className="flex flex-wrap gap-6 md:gap-8 border-b border-slate-200 w-full md:w-auto">
               {allCategories.map((category) => (
@@ -43,12 +46,14 @@ export default function ArticlesPage() {
                   onClick={() => setSelectedCategory(category)}
                   className={`
                               pb-4 text-sm font-bold uppercase tracking-widest transition-all relative
-                              ${selectedCategory === category
-                      ? 'text-slate-900 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-amber-600'
-                      : 'text-slate-400 hover:text-amber-600'}
+                              ${
+                                selectedCategory === category
+                                  ? "text-slate-900 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-amber-600"
+                                  : "text-slate-400 hover:text-amber-600"
+                              }
                           `}
                 >
-                  {category === 'all' ? 'All' : category}
+                  {category === "all" ? "All" : category}
                 </button>
               ))}
             </div>
@@ -67,7 +72,7 @@ export default function ArticlesPage() {
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => setSearchQuery("")}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
                 >
                   <X className="h-4 w-4" />
@@ -82,45 +87,73 @@ export default function ArticlesPage() {
       <section className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 divide-y divide-slate-100">
           {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
-              <Link key={article.id} href={`/articles/${article.slug}`} className="group py-12 block">
+            filteredArticles.map((article) => {
+              const rowContent = (
                 <div className="grid md:grid-cols-12 gap-8 items-center">
-                  {/* Meta Data */}
                   <div className="md:col-span-2">
                     <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2">
                       {article.category}
                     </span>
                     <span className="text-sm text-slate-400 font-serif italic">
-                      {new Date(article.publishDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                      {new Date(article.publishDate).toLocaleDateString(
+                        "en-US",
+                        { month: "long", year: "numeric" },
+                      )}
                     </span>
                   </div>
 
-                  {/* Title & Excerpt */}
                   <div className="md:col-span-7">
-                    <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">
+                    <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors flex items-center gap-2">
                       {article.title}
+                      {article.isPdf && (
+                        <FileText
+                          size={18}
+                          className="text-amber-600 shrink-0"
+                        />
+                      )}
                     </h2>
                     <p className="text-slate-500 leading-relaxed line-clamp-2">
                       {article.excerpt}
                     </p>
                   </div>
 
-                  {/* Action */}
                   <div className="md:col-span-3 flex md:justify-end">
                     <span className="inline-flex items-center text-sm font-bold text-slate-900 uppercase tracking-widest group-hover:gap-4 transition-all gap-2">
-                      Read Article <ArrowRight size={16} />
+                      {article.isPdf ? "View PDF" : "Read Article"}{" "}
+                      <ArrowRight size={16} />
                     </span>
                   </div>
                 </div>
-              </Link>
-            ))
+              );
+
+              return article.isPdf ? (
+                <button
+                  key={article.id}
+                  onClick={() => setModalArticle(article)}
+                  className="group py-12 block text-left w-full"
+                >
+                  {rowContent}
+                </button>
+              ) : (
+                <Link
+                  key={article.id}
+                  href={`/articles/${article.slug}`}
+                  className="group py-12 block"
+                >
+                  {rowContent}
+                </Link>
+              );
+            })
           ) : (
             <div className="py-20 text-center">
               <p className="text-xl text-slate-400 font-serif italic">
                 No articles found matching &quot;{searchQuery}&quot;.
               </p>
               <button
-                onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCategory("all");
+                }}
                 className="mt-4 text-amber-600 font-bold uppercase tracking-widest text-sm hover:underline"
               >
                 Clear Filters
@@ -129,6 +162,12 @@ export default function ArticlesPage() {
           )}
         </div>
       </section>
+
+      <PdfArticleModal
+        article={modalArticle}
+        open={!!modalArticle}
+        onOpenChange={(open) => !open && setModalArticle(null)}
+      />
 
       {/* --- Newsletter Section --- */}
       {/* <section className="bg-[#3c144c] text-white py-20 mt-12">
